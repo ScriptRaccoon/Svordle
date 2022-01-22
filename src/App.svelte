@@ -5,6 +5,36 @@
     import Button from "./components/Button.svelte";
     import { generateRandomWord } from "./words.js";
 
+    const keys = [
+        "Q",
+        "W",
+        "E",
+        "R",
+        "T",
+        "Y",
+        "U",
+        "I",
+        "O",
+        "P",
+        "A",
+        "S",
+        "D",
+        "F",
+        "G",
+        "H",
+        "J",
+        "K",
+        "L",
+        "Z",
+        "X",
+        "C",
+        "V",
+        "B",
+        "N",
+        "M",
+        "Backspace",
+    ];
+
     let correctWord, playing, grid, evaluation, row, column;
 
     function initializeValues() {
@@ -80,7 +110,7 @@
             active={true}
         />
     </menu>
-    <Keyboard on:key={handleKeyInput} />
+    <Keyboard {keys} on:key={handleKeyInput} />
 </main>
 
 <style>

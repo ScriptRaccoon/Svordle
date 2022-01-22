@@ -1,40 +1,23 @@
 <script>
     import Key from "./Key.svelte";
+    export let keys = [];
 </script>
 
-<section class="keyboard">
+<section>
     <div class="row">
-        <Key on:key key={"Q"} />
-        <Key on:key key={"W"} />
-        <Key on:key key={"E"} />
-        <Key on:key key={"R"} />
-        <Key on:key key={"T"} />
-        <Key on:key key={"Y"} />
-        <Key on:key key={"U"} />
-        <Key on:key key={"I"} />
-        <Key on:key key={"O"} />
-        <Key on:key key={"P"} />
+        {#each keys.slice(0, 10) as key}
+            <Key on:key {key} />
+        {/each}
     </div>
     <div class="row">
-        <Key on:key key={"A"} />
-        <Key on:key key={"S"} />
-        <Key on:key key={"D"} />
-        <Key on:key key={"F"} />
-        <Key on:key key={"G"} />
-        <Key on:key key={"H"} />
-        <Key on:key key={"J"} />
-        <Key on:key key={"K"} />
-        <Key on:key key={"L"} />
+        {#each keys.slice(10, 19) as key}
+            <Key on:key {key} />
+        {/each}
     </div>
     <div class="row">
-        <Key on:key key={"Z"} />
-        <Key on:key key={"X"} />
-        <Key on:key key={"C"} />
-        <Key on:key key={"V"} />
-        <Key on:key key={"B"} />
-        <Key on:key key={"N"} />
-        <Key on:key key={"M"} />
-        <Key on:key key={"Backspace"} />
+        {#each keys.slice(19, 27) as key}
+            <Key on:key {key} />
+        {/each}
     </div>
 </section>
 
