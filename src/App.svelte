@@ -35,7 +35,15 @@
         "Backspace",
     ];
 
-    let correctWord, playing, grid, evaluation, row, column;
+    const letters = keys.filter((key) => key.length == 1);
+
+    let correctWord,
+        playing,
+        grid,
+        evaluation,
+        row,
+        column,
+        letterEvaluation;
 
     function initializeValues() {
         correctWord = generateRandomWord();
@@ -49,6 +57,9 @@
             .map((i) => new Array(5).fill(null));
         row = 0;
         column = 0;
+        letterEvaluation = Object.fromEntries(
+            letters.map((letter) => [letter, null])
+        );
     }
 
     initializeValues();
@@ -76,6 +87,8 @@
                     : correctWord.includes(letter)
                     ? "almost"
                     : "incorrect";
+            if (!letterEvaluation[letter])
+                letterEvaluation[letter] = evaluation[row][index];
         }
         if (evaluation[row].every((ev) => ev == "correct")) {
             playing = false;
@@ -110,7 +123,7 @@
             active={true}
         />
     </menu>
-    <Keyboard {keys} on:key={handleKeyInput} />
+    <Keyboard {letterEvaluation} {keys} on:key={handleKeyInput} />
 </main>
 
 <style>

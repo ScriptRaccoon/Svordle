@@ -10,12 +10,14 @@
             pressed = false;
         }, 70);
     }
+    export let letterEvaluation;
 </script>
 
 <button
     class:backspace={key == "Backspace"}
     class:pressed
     on:click={handleClick}
+    class={letterEvaluation[key] || ""}
 >
     {#if key == "Backspace"}
         <i class="fas fa-backspace" />
@@ -46,5 +48,14 @@
     button.pressed {
         transform: translateY(3px);
         box-shadow: none;
+    }
+    button.correct {
+        background: var(--color-correct);
+    }
+    button.almost {
+        background: var(--color-almost);
+    }
+    button.incorrect {
+        background: var(--color-incorrect);
     }
 </style>

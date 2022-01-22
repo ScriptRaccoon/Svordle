@@ -10,9 +10,8 @@
         {#each indices as column}
             <span
                 class:current={row == currentRow}
-                class={evaluation[row][column]
-                    ? evaluation[row][column]
-                    : ""}>{grid[row][column]}</span
+                class={evaluation[row][column] || ""}
+                >{grid[row][column]}</span
             >
         {/each}
     {/each}
@@ -38,17 +37,17 @@
     }
 
     span.correct {
-        background: green;
+        background: var(--color-correct);
         border: 1px solid transparent;
     }
 
     span.almost {
-        background: rgb(231, 189, 2);
+        background: var(--color-almost);
         border: 1px solid transparent;
     }
 
     span.incorrect {
-        background: #555;
+        background: var(--color-incorrect);
         border: 1px solid transparent;
     }
 

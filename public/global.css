@@ -1,3 +1,9 @@
+:root {
+    --color-correct: green;
+    --color-almost: rgb(231, 189, 2);
+    --color-incorrect: #333;
+}
+
 * {
     margin: 0;
     padding: 0;
