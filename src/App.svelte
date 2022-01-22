@@ -3,8 +3,15 @@
     import Grid from "./components/Grid.svelte";
     import Keyboard from "./components/Keyboard.svelte";
     import Submit from "./components/Submit.svelte";
+    import { onMount } from "svelte";
+    import { generateRandomWord } from "./words.js";
 
-    let correctWord = "APPLE";
+    let correctWord;
+
+    onMount(() => {
+        correctWord = generateRandomWord();
+        console.log(correctWord);
+    });
 
     let playing = true;
 

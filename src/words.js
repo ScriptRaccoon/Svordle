@@ -8913,3 +8913,12 @@ export const words = [
     "zuzim",
     "zymes",
 ];
+
+export function isValidWord(word) {
+    return words.includes(word);
+}
+
+export function generateRandomWord() {
+    const index = Math.floor(Math.random() * words.length);
+    return words[index];
+}
