@@ -47,15 +47,18 @@
     }
     button.pressed {
         transform: translateY(3px);
-        box-shadow: none;
+        box-shadow: none !important;
     }
     button.correct {
         background: var(--color-correct);
+        box-shadow: 0px 3px 0px var(--color-correct-dark);
     }
     button.almost {
         background: var(--color-almost);
+        box-shadow: 0px 3px 0px var(--color-almost-dark);
     }
     button.incorrect {
         background: var(--color-incorrect);
+        box-shadow: 0px 3px 0px var(--color-incorrect-dark);
     }
 </style>

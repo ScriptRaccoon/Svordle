@@ -1,7 +1,10 @@
 :root {
-    --color-correct: green;
-    --color-almost: rgb(231, 189, 2);
-    --color-incorrect: #333;
+    --color-correct: hsl(120, 100%, 25%);
+    --color-almost: hsl(49, 98%, 46%);
+    --color-incorrect: hsl(0, 0%, 20%);
+    --color-correct-dark: hsl(120, 100%, 15%);
+    --color-almost-dark: hsl(49, 98%, 36%);
+    --color-incorrect-dark: hsl(0, 0%, 10%);
 }
 
 * {
