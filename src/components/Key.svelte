@@ -19,7 +19,7 @@
     button {
         width: 40px;
         height: 50px;
-        background: #666;
+        background: var(--color-gray);
         display: flex;
         justify-content: center;
         align-items: center;

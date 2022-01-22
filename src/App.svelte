@@ -2,28 +2,26 @@
     import Header from "./components/Header.svelte";
     import Grid from "./components/Grid.svelte";
     import Keyboard from "./components/Keyboard.svelte";
-    import Submit from "./components/Submit.svelte";
-    import { onMount } from "svelte";
+    import Button from "./components/Button.svelte";
     import { generateRandomWord } from "./words.js";
 
-    let correctWord;
+    let correctWord, playing, grid, evaluation, row, column;
 
-    onMount(() => {
+    function initializeValues() {
         correctWord = generateRandomWord();
         console.log(correctWord);
-    });
+        playing = true;
+        grid = new Array(5)
+            .fill("")
+            .map((i) => new Array(5).fill(""));
+        evaluation = new Array(5)
+            .fill(0)
+            .map((i) => new Array(5).fill(null));
+        row = 0;
+        column = 0;
+    }
 
-    let playing = true;
-
-    let grid = new Array(5)
-        .fill("")
-        .map((i) => new Array(5).fill(""));
-    let evaluation = new Array(5)
-        .fill(0)
-        .map((i) => new Array(5).fill(null));
-
-    let row = 0;
-    let column = 0;
+    initializeValues();
 
     function handleKeyInput(e) {
         if (!playing) return;
@@ -54,15 +52,12 @@
         }
     }
 
-    function handleSubmit(e) {
-        e.preventDefault();
+    function handleSubmit() {
         if (column != 5) return;
         evaluateWord();
         if (row < 4) {
-            setTimeout(() => {
-                column = 0;
-                row++;
-            }, 500);
+            column = 0;
+            row++;
         } else {
             playing = false;
         }
@@ -72,9 +67,18 @@
 <main>
     <Header />
     <Grid {grid} {evaluation} />
-    <form on:submit={handleSubmit}>
-        <Submit active={column == 5 && playing} />
-    </form>
+    <menu>
+        <Button
+            text="Submit"
+            action={handleSubmit}
+            active={column == 5 && playing}
+        />
+        <Button
+            text="Restart"
+            action={initializeValues}
+            active={true}
+        />
+    </menu>
     <Keyboard on:key={handleKeyInput} />
 </main>
 
@@ -83,8 +87,11 @@
         max-width: 700px;
         margin: 0 auto;
     }
-    form {
+    menu {
         text-align: center;
         padding: 15px 0px;
+        display: flex;
+        gap: 20px;
+        justify-content: center;
     }
 </style>

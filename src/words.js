@@ -8915,10 +8915,10 @@ export const words = [
 ];
 
 export function isValidWord(word) {
-    return words.includes(word);
+    return words.includes(word.toLowerCase());
 }
 
 export function generateRandomWord() {
     const index = Math.floor(Math.random() * words.length);
-    return words[index];
+    return words[index].toUpperCase();
 }

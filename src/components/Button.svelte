@@ -1,12 +1,16 @@
 <script>
+    export let text = "";
+    export let action = () => {};
     export let active = false;
 </script>
 
-<button class:active> Submit </button>
+<button disabled={!active} class:active on:click={action}
+    >{text}</button
+>
 
 <style>
     button {
-        background: #555;
+        background: var(--color-gray);
         font-size: 20px;
         padding: 10px 20px;
     }
