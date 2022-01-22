@@ -66,7 +66,7 @@
 
 <main>
     <Header />
-    <Grid {grid} {evaluation} />
+    <Grid {grid} {evaluation} currentRow={row} />
     <menu>
         <Button
             text="Submit"
