@@ -30,4 +30,7 @@
         width: 60px;
         background: rgb(245, 71, 71);
     }
+    button:hover {
+        filter: brightness(1.2);
+    }
 </style>
