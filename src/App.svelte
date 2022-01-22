@@ -49,13 +49,14 @@
         }
         if (evaluation[row].every((ev) => ev == "correct")) {
             playing = false;
+            row = null;
         }
     }
 
     function handleSubmit() {
         if (column != 5) return;
         evaluateWord();
-        if (row < 4) {
+        if (playing && row < 4) {
             column = 0;
             row++;
         } else {

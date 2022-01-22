@@ -10,7 +10,7 @@
 
 <style>
     button {
-        background: var(--color-gray);
+        background: #666;
         font-size: 20px;
         padding: 10px 20px;
     }
