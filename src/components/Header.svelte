@@ -23,4 +23,10 @@
         margin: 0 auto;
         width: min(95vw, 400px);
     }
+    button {
+        opacity: 0.5;
+    }
+    button:hover {
+        opacity: 1;
+    }
 </style>
