@@ -19,16 +19,18 @@
 
 <style>
     .grid {
+        margin: 0 auto;
+        --size: min(95vw, 500px);
+        width: var(--size);
+        height: var(--size);
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         grid-template-rows: repeat(5, 1fr);
-        gap: 10px;
+        gap: calc(0.02 * var(--size));
     }
 
     span {
-        width: 100px;
-        height: 100px;
-        font-size: 80px;
+        font-size: calc(0.13 * var(--size));
         border: 1px solid #444;
         display: flex;
         justify-content: center;

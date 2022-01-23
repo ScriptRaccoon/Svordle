@@ -47,7 +47,6 @@
 
     function initializeValues() {
         correctWord = generateRandomWord();
-        console.log(correctWord);
         playing = true;
         grid = new Array(5)
             .fill("")
@@ -127,10 +126,6 @@
 </main>
 
 <style>
-    main {
-        max-width: 700px;
-        margin: 0 auto;
-    }
     menu {
         text-align: center;
         padding: 15px 0px;
