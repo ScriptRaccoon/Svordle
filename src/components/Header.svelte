@@ -11,7 +11,7 @@
     header {
         display: flex;
         justify-content: space-between;
-        font-size: 30px;
+        font-size: min(30px, 6vw);
         padding: 10px 5px;
     }
 </style>
