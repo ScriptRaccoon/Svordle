@@ -36,3 +36,7 @@ button {
 button {
     cursor: pointer;
 }
+
+.center {
+    text-align: center;
+}

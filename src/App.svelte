@@ -7,7 +7,7 @@
     import Home from "./components/Home.svelte";
     import Help from "./components/Help.svelte";
 
-    let screen = "help";
+    let screen = "home";
 
     const keys = [
         "Q",
@@ -52,10 +52,10 @@
     function initializeValues() {
         correctWord = generateRandomWord();
         playing = true;
-        grid = new Array(5)
+        grid = new Array(6)
             .fill("")
             .map((i) => new Array(5).fill(""));
-        evaluation = new Array(5)
+        evaluation = new Array(6)
             .fill(0)
             .map((i) => new Array(5).fill(null));
         row = 0;
@@ -102,7 +102,7 @@
     function handleSubmit() {
         if (column != 5) return;
         evaluateWord();
-        if (playing && row < 4) {
+        if (playing && row < 5) {
             column = 0;
             row++;
         } else {

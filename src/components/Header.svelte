@@ -20,5 +20,7 @@
         justify-content: space-between;
         font-size: min(30px, 6vw);
         padding: 10px 5px;
+        margin: 0 auto;
+        width: min(95vw, 400px);
     }
 </style>

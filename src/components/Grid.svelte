@@ -1,13 +1,14 @@
 <script>
     export let grid = [];
     export let evaluation = [];
-    export let indices = [0, 1, 2, 3, 4];
+    export let columnIndices = [0, 1, 2, 3, 4];
+    export let rowIndices = [0, 1, 2, 3, 4, 5];
     export let currentRow = 1;
 </script>
 
 <div class="grid">
-    {#each indices as row}
-        {#each indices as column}
+    {#each rowIndices as row}
+        {#each columnIndices as column}
             <span
                 class:current={row == currentRow}
                 class={evaluation[row][column] || ""}
@@ -20,12 +21,12 @@
 <style>
     .grid {
         margin: 0 auto;
-        --size: min(95vw, 500px);
+        --size: min(95vw, 400px);
         width: var(--size);
-        height: var(--size);
+        height: calc(1.25 * var(--size));
         display: grid;
         grid-template-columns: repeat(5, 1fr);
-        grid-template-rows: repeat(5, 1fr);
+        grid-template-rows: repeat(6, 1fr);
         gap: calc(0.02 * var(--size));
     }
 

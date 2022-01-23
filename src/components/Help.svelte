@@ -65,12 +65,10 @@
     p {
         margin: 10px 0px;
     }
-    .center {
-        text-align: center;
-    }
+
     p > span {
         border: 1px solid #444;
-        margin: 5px;
+        margin-right: 5px;
         padding: 10px;
         display: inline-flex;
         justify-content: center;
@@ -97,5 +95,9 @@
 
     div {
         padding: 5px 0px;
+    }
+
+    p:last-of-type {
+        margin-top: 20px;
     }
 </style>
