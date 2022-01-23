@@ -10,8 +10,6 @@
     import { copyStringToClipboard } from "./utils.js";
 
     let screen = "home";
-    let popup = false;
-    let popupText = "";
 
     const keys = [
         "Q",
@@ -51,7 +49,10 @@
         evaluation,
         row,
         column,
-        letterEvaluation;
+        letterEvaluation,
+        popup,
+        popupText,
+        won;
 
     function initializeValues() {
         correctWord = generateRandomWord();
@@ -68,6 +69,9 @@
         letterEvaluation = Object.fromEntries(
             letters.map((letter) => [letter, null])
         );
+        popup = false;
+        popupText = "";
+        won = false;
     }
 
     initializeValues();
@@ -103,7 +107,8 @@
                 letterEvaluation[letter] = evaluation[row][index];
         }
         if (evaluation[row].every((ev) => ev == "correct")) {
-            showPopup("Correct!");
+            won = true;
+            showPopup("You won!");
             endGame();
         }
         return true;
@@ -116,6 +121,7 @@
                 column = 0;
                 row++;
             } else {
+                if (!won) showPopup("Gameover");
                 endGame();
             }
         }
