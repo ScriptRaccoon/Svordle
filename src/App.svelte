@@ -3,7 +3,7 @@
     import Grid from "./components/Grid.svelte";
     import Keyboard from "./components/Keyboard.svelte";
     import Button from "./components/Button.svelte";
-    import { generateRandomWord } from "./words.js";
+    import { generateRandomWord, isValidWord } from "./words.js";
     import Home from "./components/Home.svelte";
     import Help from "./components/Help.svelte";
     import Popup from "./components/Popup.svelte";
@@ -86,6 +86,10 @@
     }
 
     function evaluateWord() {
+        if (!isValidWord(grid[row].join(""))) {
+            showPopup("No valid word");
+            return false;
+        }
         for (let index = 0; index < 5; index++) {
             const letter = grid[row][index];
             evaluation[row][index] =
@@ -102,16 +106,18 @@
             playing = false;
             row = null;
         }
+        return true;
     }
 
     function handleSubmit() {
         if (column != 5) return;
-        evaluateWord();
-        if (playing && row < 5) {
-            column = 0;
-            row++;
-        } else {
-            playing = false;
+        if (evaluateWord()) {
+            if (playing && row < 5) {
+                column = 0;
+                row++;
+            } else {
+                playing = false;
+            }
         }
     }
 
