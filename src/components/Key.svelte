@@ -28,18 +28,18 @@
 
 <style>
     button {
-        width: 40px;
-        height: 50px;
+        width: min(40px, 8vw);
+        height: min(50px, 10vw);
         background: #666;
         display: flex;
         justify-content: center;
         align-items: center;
-        border-radius: 7px;
-        font-size: 30px;
+        border-radius: 18%;
+        font-size: min(30px, 7vw);
         box-shadow: 0px 3px 0px #444;
     }
     button.backspace {
-        width: 60px;
+        width: min(60px, 12vw);
         background: rgb(245, 71, 71);
     }
     button:hover {

@@ -126,6 +126,9 @@
 </main>
 
 <style>
+    main {
+        padding: 0px 10px;
+    }
     menu {
         text-align: center;
         padding: 15px 0px;

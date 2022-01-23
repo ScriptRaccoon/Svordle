@@ -24,10 +24,10 @@
 
 <style>
     .row {
-        width: 100%;
+        --gap: min(8px, 1.5vw);
         display: flex;
         justify-content: center;
-        gap: 8px;
-        margin-bottom: 8px;
+        gap: var(--gap);
+        margin-bottom: var(--gap);
     }
 </style>
