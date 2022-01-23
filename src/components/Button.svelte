@@ -14,6 +14,7 @@
         background: #666;
         font-size: var(--size);
         padding: calc(0.5 * var(--size)) var(--size);
+        border-radius: 3px;
     }
     button.active {
         background: green;

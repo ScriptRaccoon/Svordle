@@ -4,6 +4,9 @@
     import Keyboard from "./components/Keyboard.svelte";
     import Button from "./components/Button.svelte";
     import { generateRandomWord } from "./words.js";
+    import Home from "./components/Home.svelte";
+
+    let screen = "home";
 
     const keys = [
         "Q",
@@ -61,7 +64,7 @@
         );
     }
 
-    initializeValues();
+    $: if (screen == "game") initializeValues();
 
     function handleKeyInput(e) {
         if (!playing) return;
@@ -108,21 +111,25 @@
 </script>
 
 <main>
-    <Header />
-    <Grid {grid} {evaluation} currentRow={row} />
-    <menu>
-        <Button
-            text="Submit"
-            action={handleSubmit}
-            active={column == 5 && playing}
-        />
-        <Button
-            text="Restart"
-            action={initializeValues}
-            active={true}
-        />
-    </menu>
-    <Keyboard {letterEvaluation} {keys} on:key={handleKeyInput} />
+    {#if screen == "home"}
+        <Home bind:screen />
+    {:else if screen == "game"}
+        <Header bind:screen />
+        <Grid {grid} {evaluation} currentRow={row} />
+        <menu>
+            <Button
+                text="Submit"
+                action={handleSubmit}
+                active={column == 5 && playing}
+            />
+            <Button
+                text="Restart"
+                action={initializeValues}
+                active={true}
+            />
+        </menu>
+        <Keyboard {letterEvaluation} {keys} on:key={handleKeyInput} />
+    {/if}
 </main>
 
 <style>

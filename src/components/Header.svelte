@@ -1,8 +1,12 @@
+<script>
+    export let screen = "home";
+</script>
+
 <header>
     <button>
         <i class="far fa-question-circle" />
     </button>
-    <button>
+    <button on:click={() => (screen = "home")}>
         <i class="fas fa-home" />
     </button>
 </header>
