@@ -4,7 +4,10 @@
 
 <header>
     <button>
-        <i class="far fa-question-circle" />
+        <i
+            class="far fa-question-circle"
+            on:click={() => (screen = "help")}
+        />
     </button>
     <button on:click={() => (screen = "home")}>
         <i class="fas fa-home" />

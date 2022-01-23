@@ -5,8 +5,9 @@
     import Button from "./components/Button.svelte";
     import { generateRandomWord } from "./words.js";
     import Home from "./components/Home.svelte";
+    import Help from "./components/Help.svelte";
 
-    let screen = "home";
+    let screen = "help";
 
     const keys = [
         "Q",
@@ -64,7 +65,7 @@
         );
     }
 
-    $: if (screen == "game") initializeValues();
+    initializeValues();
 
     function handleKeyInput(e) {
         if (!playing) return;
@@ -113,6 +114,8 @@
 <main>
     {#if screen == "home"}
         <Home bind:screen />
+    {:else if screen == "help"}
+        <Help bind:screen />
     {:else if screen == "game"}
         <Header bind:screen />
         <Grid {grid} {evaluation} currentRow={row} />
