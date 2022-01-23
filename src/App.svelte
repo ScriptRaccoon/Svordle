@@ -6,8 +6,11 @@
     import { generateRandomWord } from "./words.js";
     import Home from "./components/Home.svelte";
     import Help from "./components/Help.svelte";
+    import Popup from "./components/Popup.svelte";
 
     let screen = "home";
+    let popup = false;
+    let popupText = "";
 
     const keys = [
         "Q",
@@ -51,6 +54,7 @@
 
     function initializeValues() {
         correctWord = generateRandomWord();
+        console.log(correctWord);
         playing = true;
         grid = new Array(6)
             .fill("")
@@ -94,6 +98,7 @@
                 letterEvaluation[letter] = evaluation[row][index];
         }
         if (evaluation[row].every((ev) => ev == "correct")) {
+            showPopup("Correct!");
             playing = false;
             row = null;
         }
@@ -108,6 +113,11 @@
         } else {
             playing = false;
         }
+    }
+
+    function showPopup(text) {
+        popupText = text;
+        popup = true;
     }
 </script>
 
@@ -132,6 +142,9 @@
             />
         </menu>
         <Keyboard {letterEvaluation} {keys} on:key={handleKeyInput} />
+    {/if}
+    {#if popup}
+        <Popup bind:popup {popupText} />
     {/if}
 </main>
 
