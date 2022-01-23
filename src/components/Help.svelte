@@ -44,11 +44,7 @@
         new word for you.
     </p>
     <p class="center">
-        <Button
-            text="Play"
-            active={true}
-            action={() => (screen = "game")}
-        />
+        <Button text="Play" action={() => (screen = "game")} />
     </p>
 </div>
 

@@ -4,13 +4,14 @@
     export let columnIndices = [0, 1, 2, 3, 4];
     export let rowIndices = [0, 1, 2, 3, 4, 5];
     export let currentRow = 1;
+    export let playing = true;
 </script>
 
 <div class="grid">
     {#each rowIndices as row}
         {#each columnIndices as column}
             <span
-                class:current={row == currentRow}
+                class:current={row == currentRow && playing}
                 class={evaluation[row][column] || ""}
                 >{grid[row][column]}</span
             >

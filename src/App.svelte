@@ -7,6 +7,7 @@
     import Home from "./components/Home.svelte";
     import Help from "./components/Help.svelte";
     import Popup from "./components/Popup.svelte";
+    import { copyStringToClipboard } from "./utils.js";
 
     let screen = "home";
     let popup = false;
@@ -103,8 +104,7 @@
         }
         if (evaluation[row].every((ev) => ev == "correct")) {
             showPopup("Correct!");
-            playing = false;
-            row = null;
+            endGame();
         }
         return true;
     }
@@ -116,14 +116,40 @@
                 column = 0;
                 row++;
             } else {
-                playing = false;
+                endGame();
             }
         }
+    }
+
+    function endGame() {
+        playing = false;
     }
 
     function showPopup(text) {
         popupText = text;
         popup = true;
+    }
+
+    function shareResult() {
+        let result = "Wordle\n\n";
+        for (let i = 0; i <= row; i++) {
+            for (let j = 0; j < 5; j++) {
+                switch (evaluation[i][j]) {
+                    case "correct":
+                        result += "🟩";
+                        break;
+                    case "almost":
+                        result += "🟨";
+                        break;
+                    case "incorrect":
+                        result += "⬛";
+                        break;
+                }
+            }
+            result += "\n";
+        }
+        copyStringToClipboard(result);
+        showPopup("Copied result to clipboard");
     }
 </script>
 
@@ -134,18 +160,15 @@
         <Help bind:screen />
     {:else if screen == "game"}
         <Header bind:screen />
-        <Grid {grid} {evaluation} currentRow={row} />
+        <Grid {playing} {grid} {evaluation} currentRow={row} />
         <menu>
-            <Button
-                text="Submit"
-                action={handleSubmit}
-                active={column == 5 && playing}
-            />
-            <Button
-                text="Restart"
-                action={initializeValues}
-                active={true}
-            />
+            {#if column == 5 && playing}
+                <Button text="Submit" action={handleSubmit} />
+            {/if}
+            <Button text="Restart" action={initializeValues} />
+            {#if !playing}
+                <Button text="Share" action={shareResult} />
+            {/if}
         </menu>
         <Keyboard {letterEvaluation} {keys} on:key={handleKeyInput} />
     {/if}

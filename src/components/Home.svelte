@@ -7,11 +7,7 @@
     <h1>Wordle</h1>
     <p>The classical word game</p>
     <p>
-        <Button
-            text="Start"
-            active={true}
-            action={() => (screen = "game")}
-        />
+        <Button text="Start" action={() => (screen = "game")} />
     </p>
 </section>
 
