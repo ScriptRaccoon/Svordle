@@ -137,7 +137,9 @@
     }
 
     function shareResult() {
-        let result = "Wordle\n\n";
+        let result = "Wordle ";
+        result += won ? (row + 1).toString() : "X";
+        result += "/6\n\n";
         for (let i = 0; i <= row; i++) {
             for (let j = 0; j < 5; j++) {
                 switch (evaluation[i][j]) {
