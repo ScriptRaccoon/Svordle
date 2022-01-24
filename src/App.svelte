@@ -14,8 +14,6 @@
 
     let screen = "home";
 
-    let keys = [];
-
     $: keys =
         language == "en"
             ? [
@@ -222,7 +220,7 @@
     {#if screen == "home"}
         <Home bind:language bind:screen />
     {:else if screen == "help"}
-        <Help bind:screen />
+        <Help {language} bind:screen />
     {:else if screen == "game"}
         <div transition:fade={{ duration: 200 }}>
             <Header bind:screen />

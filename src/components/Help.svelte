@@ -2,24 +2,20 @@
     import { fade } from "svelte/transition";
     export let screen = "help";
     import Button from "./Button.svelte";
+    export let language = "en";
+    import { texts } from "../language.js";
 </script>
 
 <section transition:fade={{ duration: 200 }}>
-    <h2 class="center">Help</h2>
-    <p>Guess the correct word with 6 (or less) tries.</p>
-    <p>
-        After each try the letter tiles change their color to show you
-        how close your guess was to the correct word.
-    </p>
+    <h2 class="center">{texts.helpTitle[language]}</h2>
+    <p>{texts.help1[language]}</p>
+    <p>{texts.help2[language]}</p>
     <div>
         <p class="center">
             <span class="correct">A</span><span>P</span><span>P</span
             ><span>L</span><span>E</span>
         </p>
-        <p>
-            The letter A is contained in the word and at the correct
-            position.
-        </p>
+        <p>{texts.help3[language]}</p>
     </div>
 
     <div>
@@ -27,10 +23,7 @@
             <span>D</span><span class="almost">R</span><span>U</span
             ><span>M</span><span>S</span>
         </p>
-        <p>
-            The letter R is contained in the word, but not at the
-            correct position.
-        </p>
+        <p>{texts.help4[language]}</p>
     </div>
     <div>
         <p class="center">
@@ -38,14 +31,11 @@
                 class="incorrect">O</span
             ><span>S</span>
         </p>
-        <p>The letter O does not appear in the word at all.</p>
+        <p>{texts.help5[language]}</p>
     </div>
-    <p>
-        You can restart the game at any time. This also generates a
-        new word for you.
-    </p>
+    <p>{texts.help6[language]}</p>
     <p class="center">
-        <Button text="Play" action={() => (screen = "game")} />
+        <Button text="Start" action={() => (screen = "game")} />
     </p>
 </section>
 

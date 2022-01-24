@@ -3,11 +3,12 @@
     export let screen = "home";
     import Button from "./Button.svelte";
     export let language = "en";
+    import { texts } from "../language.js";
 </script>
 
 <section transition:fade={{ duration: 200 }}>
     <h1>Wordle</h1>
-    <p>The classical word game</p>
+    <p>{texts.subtitle[language]}</p>
 
     <menu>
         <button
