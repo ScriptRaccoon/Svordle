@@ -56,7 +56,6 @@
 
     function initializeValues() {
         correctWord = generateRandomWord();
-        console.log(correctWord);
         playing = true;
         grid = new Array(6)
             .fill("")
