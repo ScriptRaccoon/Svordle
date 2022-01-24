@@ -91,6 +91,7 @@
 
     function initializeValues() {
         correctWord = generateRandomWord();
+        console.log(correctWord);
         playing = true;
         grid = new Array(6)
             .fill("")
@@ -126,7 +127,7 @@
 
     function evaluateWord() {
         if (!isValidWord(grid[row].join(""))) {
-            showPopup("No valid word");
+            showPopup(texts.notValid[language]);
             return false;
         }
         for (let index = 0; index < 5; index++) {
@@ -145,7 +146,7 @@
         }
         if (evaluation[row].every((ev) => ev == "correct")) {
             won = true;
-            showPopup("You won! 🎉");
+            showPopup(texts.won[language]);
             endGame();
         }
         return true;
@@ -162,7 +163,7 @@
                     showPopup(
                         `Gameover
                         <br style="margin-bottom:20px">
-                        The correct word was:<br style="margin-bottom:5px">
+                        ${texts.correct[language]}<br style="margin-bottom:5px">
                         ${correctWord}`
                     );
                 endGame();
@@ -200,7 +201,7 @@
             result += "\n";
         }
         copyStringToClipboard(result);
-        showPopup("Copied result to clipboard");
+        showPopup(texts.clipboard[language]);
         setTimeout(() => {
             popup = false;
         }, 1500);

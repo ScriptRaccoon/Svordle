@@ -43,4 +43,20 @@ export const texts = {
         en: "Share",
         de: "Teilen",
     },
+    notValid: {
+        en: "No valid word",
+        de: "Ungültiges Wort",
+    },
+    won: {
+        en: "You won! 🎉",
+        de: "Gewonnen! 🎉",
+    },
+    correct: {
+        en: "The correct word was:",
+        de: "Das richtige Wort war:",
+    },
+    clipboard: {
+        en: "Copied result to clipboard",
+        de: "Ergebnis in die Zwischenablage kopiert",
+    },
 };
