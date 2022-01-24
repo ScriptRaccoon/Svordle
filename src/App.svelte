@@ -57,6 +57,7 @@
                   "I",
                   "O",
                   "P",
+                  "Ü",
                   "A",
                   "S",
                   "D",
@@ -66,6 +67,8 @@
                   "J",
                   "K",
                   "L",
+                  "Ö",
+                  "Ä",
                   "Y",
                   "X",
                   "C",
@@ -73,6 +76,7 @@
                   "B",
                   "N",
                   "M",
+                  "ß",
                   "Backspace",
               ];
 
@@ -246,6 +250,7 @@
                 {/if}
             </menu>
             <Keyboard
+                {language}
                 {letterEvaluation}
                 {keys}
                 on:key={handleKeyInput}
