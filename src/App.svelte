@@ -161,6 +161,16 @@
         copyStringToClipboard(result);
         showPopup("Copied result to clipboard");
     }
+
+    function handleRestart() {
+        if (
+            !playing ||
+            window.confirm(
+                "Are you sure that you want to restart the game?"
+            )
+        )
+            initializeValues();
+    }
 </script>
 
 <main>
@@ -175,7 +185,7 @@
             {#if column == 5 && playing}
                 <Button text="Submit" action={handleSubmit} />
             {/if}
-            <Button text="Restart" action={initializeValues} />
+            <Button text="Restart" action={handleRestart} />
             {#if !playing}
                 <Button text="Share" action={shareResult} />
             {/if}
