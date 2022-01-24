@@ -123,7 +123,13 @@
                 column = 0;
                 row++;
             } else {
-                if (!won) showPopup("Gameover");
+                if (!won)
+                    showPopup(
+                        `Gameover
+                        <br style="margin-bottom:20px">
+                        The correct word was:<br style="margin-bottom:5px">
+                        ${correctWord}`
+                    );
                 endGame();
             }
         }

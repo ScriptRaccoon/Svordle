@@ -8,7 +8,7 @@
     transition:fade={{ duration: 120 }}
     on:click={() => (popup = false)}
 >
-    {popupText}
+    {@html popupText}
 </aside>
 
 <style>
@@ -18,9 +18,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
         background: #000e;
         z-index: 100;
         cursor: pointer;
         font-size: 30px;
+        text-align: center;
     }
 </style>
