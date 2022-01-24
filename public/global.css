@@ -5,6 +5,8 @@
     --color-correct-dark: hsl(120, 100%, 15%);
     --color-almost-dark: hsl(49, 98%, 36%);
     --color-incorrect-dark: hsl(0, 0%, 10%);
+    --color-backspace: hsl(0, 90%, 62%);
+    --color-backspace-dark: hsl(0, 90%, 30%);
 }
 
 * {

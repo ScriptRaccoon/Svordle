@@ -40,7 +40,8 @@
     }
     button.backspace {
         width: min(60px, 12vw);
-        background: rgb(245, 71, 71);
+        background: var(--color-backspace);
+        box-shadow: 0px 3px 0px var(--color-backspace-dark);
     }
     button:hover {
         filter: brightness(1.2);
