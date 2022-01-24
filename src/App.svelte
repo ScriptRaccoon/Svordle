@@ -166,6 +166,9 @@
         }
         copyStringToClipboard(result);
         showPopup("Copied result to clipboard");
+        setTimeout(() => {
+            popup = false;
+        }, 1500);
     }
 
     function handleRestart() {
