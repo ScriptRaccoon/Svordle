@@ -97,14 +97,17 @@
         }
         for (let index = 0; index < 5; index++) {
             const letter = grid[row][index];
-            evaluation[row][index] =
-                correctWord[index] == letter
-                    ? "correct"
-                    : correctWord.includes(letter)
-                    ? "almost"
-                    : "incorrect";
-            if (!letterEvaluation[letter])
-                letterEvaluation[letter] = evaluation[row][index];
+            if (correctWord[index] == letter) {
+                evaluation[row][index] = "correct";
+                letterEvaluation[letter] = "correct";
+            } else if (correctWord.includes(letter)) {
+                evaluation[row][index] = "almost";
+                if (letterEvaluation[letter] != "correct")
+                    letterEvaluation[letter] = "almost";
+            } else {
+                evaluation[row][index] = "incorrect";
+                letterEvaluation[letter] = "incorrect";
+            }
         }
         if (evaluation[row].every((ev) => ev == "correct")) {
             won = true;
