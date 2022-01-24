@@ -90,7 +90,7 @@
         won;
 
     function initializeValues() {
-        correctWord = generateRandomWord();
+        correctWord = generateRandomWord(language);
         console.log(correctWord);
         playing = true;
         grid = new Array(6)
@@ -126,7 +126,7 @@
     }
 
     function evaluateWord() {
-        if (!isValidWord(grid[row].join(""))) {
+        if (!isValidWord(grid[row].join(""), language)) {
             showPopup(texts.notValid[language]);
             return false;
         }
