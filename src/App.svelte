@@ -14,37 +14,70 @@
 
     let screen = "home";
 
-    const keys = [
-        "Q",
-        "W",
-        "E",
-        "R",
-        "T",
-        "Y",
-        "U",
-        "I",
-        "O",
-        "P",
-        "A",
-        "S",
-        "D",
-        "F",
-        "G",
-        "H",
-        "J",
-        "K",
-        "L",
-        "Z",
-        "X",
-        "C",
-        "V",
-        "B",
-        "N",
-        "M",
-        "Backspace",
-    ];
+    let keys = [];
 
-    const letters = keys.filter((key) => key.length == 1);
+    $: keys =
+        language == "en"
+            ? [
+                  "Q",
+                  "W",
+                  "E",
+                  "R",
+                  "T",
+                  "Y",
+                  "U",
+                  "I",
+                  "O",
+                  "P",
+                  "A",
+                  "S",
+                  "D",
+                  "F",
+                  "G",
+                  "H",
+                  "J",
+                  "K",
+                  "L",
+                  "Z",
+                  "X",
+                  "C",
+                  "V",
+                  "B",
+                  "N",
+                  "M",
+                  "Backspace",
+              ]
+            : [
+                  "Q",
+                  "W",
+                  "E",
+                  "R",
+                  "T",
+                  "Z",
+                  "U",
+                  "I",
+                  "O",
+                  "P",
+                  "A",
+                  "S",
+                  "D",
+                  "F",
+                  "G",
+                  "H",
+                  "J",
+                  "K",
+                  "L",
+                  "Y",
+                  "X",
+                  "C",
+                  "V",
+                  "B",
+                  "N",
+                  "M",
+                  "Backspace",
+              ];
+
+    $: letters = keys.filter((key) => key.length == 1);
 
     let correctWord,
         playing,
@@ -76,7 +109,7 @@
         won = false;
     }
 
-    initializeValues();
+    $: if (language) initializeValues();
 
     function handleKeyInput(e) {
         if (!playing) return;
