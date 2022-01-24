@@ -31,6 +31,7 @@
 
 <style>
     button {
+        --shadow-size: min(3px, 0.7vw);
         width: min(40px, 8vw);
         height: min(50px, 10vw);
         display: flex;
@@ -39,13 +40,14 @@
         border-radius: 18%;
         font-size: min(30px, 6vw);
         background: var(--color-key);
-        box-shadow: 0px 3px 0px var(--color-key-dark);
+        box-shadow: 0px var(--shadow-size) 0px var(--color-key-dark);
     }
 
     button.backspace {
         width: min(60px, 12vw);
         background: var(--color-backspace);
-        box-shadow: 0px 3px 0px var(--color-backspace-dark);
+        box-shadow: 0px var(--shadow-size) 0px
+            var(--color-backspace-dark);
     }
 
     button:hover {
@@ -54,21 +56,24 @@
 
     button.correct {
         background: var(--color-correct);
-        box-shadow: 0px 3px 0px var(--color-correct-dark);
+        box-shadow: 0px var(--shadow-size) 0px
+            var(--color-correct-dark);
     }
 
     button.almost {
         background: var(--color-almost);
-        box-shadow: 0px 3px 0px var(--color-almost-dark);
+        box-shadow: 0px var(--shadow-size) 0px
+            var(--color-almost-dark);
     }
 
     button.incorrect {
         background: var(--color-incorrect);
-        box-shadow: 0px 3px 0px var(--color-incorrect-dark);
+        box-shadow: 0px var(--shadow-size) 0px
+            var(--color-incorrect-dark);
     }
 
     button.pressed {
-        transform: translateY(3px);
+        transform: translateY(var(--shadow-size));
         box-shadow: none !important;
     }
 </style>
