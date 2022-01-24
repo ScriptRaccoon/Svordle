@@ -1,9 +1,10 @@
 <script>
+    import { fade } from "svelte/transition";
     export let screen = "help";
     import Button from "./Button.svelte";
 </script>
 
-<section>
+<section transition:fade={{ duration: 200 }}>
     <h2 class="center">Help</h2>
     <p>Guess the correct word with 6 (or less) tries.</p>
     <p>
@@ -50,7 +51,11 @@
 
 <style>
     section {
+        position: absolute;
+        inset: 0;
         font-size: 18px;
+        padding: 10px;
+        z-index: 5;
     }
     h2 {
         padding: 15px 0px;

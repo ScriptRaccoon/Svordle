@@ -1,4 +1,5 @@
 <script>
+    import { fade } from "svelte/transition";
     import Header from "./components/Header.svelte";
     import Grid from "./components/Grid.svelte";
     import Keyboard from "./components/Keyboard.svelte";
@@ -188,18 +189,24 @@
     {:else if screen == "help"}
         <Help bind:screen />
     {:else if screen == "game"}
-        <Header bind:screen />
-        <Grid {playing} {grid} {evaluation} currentRow={row} />
-        <menu>
-            {#if column == 5 && playing}
-                <Button text="Submit" action={handleSubmit} />
-            {/if}
-            <Button text="Restart" action={handleRestart} />
-            {#if !playing}
-                <Button text="Share" action={shareResult} />
-            {/if}
-        </menu>
-        <Keyboard {letterEvaluation} {keys} on:key={handleKeyInput} />
+        <div transition:fade={{ duration: 200 }}>
+            <Header bind:screen />
+            <Grid {playing} {grid} {evaluation} currentRow={row} />
+            <menu>
+                {#if column == 5 && playing}
+                    <Button text="Submit" action={handleSubmit} />
+                {/if}
+                <Button text="Restart" action={handleRestart} />
+                {#if !playing}
+                    <Button text="Share" action={shareResult} />
+                {/if}
+            </menu>
+            <Keyboard
+                {letterEvaluation}
+                {keys}
+                on:key={handleKeyInput}
+            />
+        </div>
     {/if}
     {#if popup}
         <Popup bind:popup {popupText} />
