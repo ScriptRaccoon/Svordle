@@ -59,4 +59,8 @@ export const texts = {
         en: "Copied result to clipboard",
         de: "Ergebnis in die Zwischenablage kopiert",
     },
+    confirm: {
+        en: "Sure?",
+        de: "Sicher?",
+    },
 };

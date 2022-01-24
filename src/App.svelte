@@ -91,7 +91,8 @@
         letterEvaluation,
         popup,
         popupText,
-        won;
+        won,
+        confirm;
 
     function initializeValues() {
         correctWord = generateRandomWord(language);
@@ -110,6 +111,7 @@
         popup = false;
         popupText = "";
         won = false;
+        confirm = false;
     }
 
     $: if (language) initializeValues();
@@ -211,13 +213,14 @@
     }
 
     function handleRestart() {
-        if (
-            !playing ||
-            window.confirm(
-                "Are you sure that you want to restart the game?"
-            )
-        )
+        if (!playing || confirm) {
             initializeValues();
+        } else {
+            confirm = true;
+            setTimeout(() => {
+                confirm = false;
+            }, 5000);
+        }
     }
 </script>
 
@@ -238,7 +241,9 @@
                     />
                 {/if}
                 <Button
-                    text={texts.restart[language]}
+                    text={confirm
+                        ? texts.confirm[language]
+                        : texts.restart[language]}
                     action={handleRestart}
                 />
                 {#if !playing}
