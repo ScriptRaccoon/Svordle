@@ -10,6 +10,8 @@
     import Popup from "./components/Popup.svelte";
     import { copyStringToClipboard } from "./utils.js";
 
+    export let language = "en";
+
     let screen = "home";
 
     const keys = [
@@ -185,7 +187,7 @@
 
 <main>
     {#if screen == "home"}
-        <Home bind:screen />
+        <Home bind:language bind:screen />
     {:else if screen == "help"}
         <Help bind:screen />
     {:else if screen == "game"}
