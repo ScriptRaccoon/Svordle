@@ -3,11 +3,8 @@
 </script>
 
 <header>
-    <button>
-        <i
-            class="far fa-question-circle"
-            on:click={() => (screen = "help")}
-        />
+    <button on:click={() => (screen = "help")}>
+        <i class="far fa-question-circle" />
     </button>
     <button on:click={() => (screen = "home")}>
         <i class="fas fa-home" />
@@ -16,12 +13,12 @@
 
 <style>
     header {
+        width: 90%;
+        margin: 0 auto;
         display: flex;
         justify-content: space-between;
         font-size: min(30px, 6vw);
         padding: 10px 5px;
-        margin: 0 auto;
-        width: min(95vw, 400px);
     }
     button {
         opacity: 0.5;

@@ -7,17 +7,29 @@
 <section>
     <div class="row">
         {#each keys.slice(0, 10) as key}
-            <Key on:key {key} {letterEvaluation} />
+            <Key
+                on:key
+                {key}
+                evaluation={letterEvaluation[key] || ""}
+            />
         {/each}
     </div>
     <div class="row">
         {#each keys.slice(10, 19) as key}
-            <Key on:key {key} {letterEvaluation} />
+            <Key
+                on:key
+                {key}
+                evaluation={letterEvaluation[key] || ""}
+            />
         {/each}
     </div>
     <div class="row">
         {#each keys.slice(19, 27) as key}
-            <Key on:key {key} {letterEvaluation} />
+            <Key
+                on:key
+                {key}
+                evaluation={letterEvaluation[key] || ""}
+            />
         {/each}
     </div>
 </section>

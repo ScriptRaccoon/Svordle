@@ -7,6 +7,9 @@
     --color-incorrect-dark: hsl(0, 0%, 10%);
     --color-backspace: hsl(0, 90%, 62%);
     --color-backspace-dark: hsl(0, 90%, 30%);
+    --color-key: hsl(0, 0%, 40%);
+    --color-key-dark: hsl(0, 0%, 27%);
+    --color-button: hsl(197, 69%, 28%);
 }
 
 * {
@@ -19,9 +22,6 @@ body {
     min-height: 100vh;
     background: #111;
     color: #eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-family: Arial, Helvetica, sans-serif;
 }
 

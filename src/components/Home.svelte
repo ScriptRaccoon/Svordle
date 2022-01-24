@@ -3,7 +3,7 @@
     import Button from "./Button.svelte";
 </script>
 
-<section class="home">
+<section>
     <h1>Wordle</h1>
     <p>The classical word game</p>
     <p>
@@ -12,7 +12,8 @@
 </section>
 
 <style>
-    .home {
+    section {
+        padding-top: 100px;
         text-align: center;
     }
     h1 {
@@ -20,7 +21,7 @@
         text-transform: uppercase;
     }
     p {
-        font-size: 20px;
+        font-size: 18px;
         margin: 20px 0px;
     }
 </style>

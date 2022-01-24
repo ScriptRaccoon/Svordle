@@ -111,7 +111,7 @@
         }
         if (evaluation[row].every((ev) => ev == "correct")) {
             won = true;
-            showPopup("You won!");
+            showPopup("You won! 🎉");
             endGame();
         }
         return true;
@@ -190,7 +190,9 @@
 
 <style>
     main {
-        padding: 0px 10px;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 10px;
     }
     menu {
         text-align: center;

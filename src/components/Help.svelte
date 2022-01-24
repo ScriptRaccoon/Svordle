@@ -3,15 +3,15 @@
     import Button from "./Button.svelte";
 </script>
 
-<div class="help">
-    <h2>Help</h2>
+<section>
+    <h2 class="center">Help</h2>
     <p>Guess the correct word with 6 (or less) tries.</p>
     <p>
         After each try the letter tiles change their color to show you
         how close your guess was to the correct word.
     </p>
     <div>
-        <p>
+        <p class="center">
             <span class="correct">A</span><span>P</span><span>P</span
             ><span>L</span><span>E</span>
         </p>
@@ -22,7 +22,7 @@
     </div>
 
     <div>
-        <p>
+        <p class="center">
             <span>D</span><span class="almost">R</span><span>U</span
             ><span>M</span><span>S</span>
         </p>
@@ -32,7 +32,7 @@
         </p>
     </div>
     <div>
-        <p>
+        <p class="center">
             <span>C</span><span>H</span><span>A</span><span
                 class="incorrect">O</span
             ><span>S</span>
@@ -46,16 +46,13 @@
     <p class="center">
         <Button text="Play" action={() => (screen = "game")} />
     </p>
-</div>
+</section>
 
 <style>
-    .help {
-        max-width: 500px;
-        font-size: 20px;
-        padding-bottom: 10px;
+    section {
+        font-size: 18px;
     }
     h2 {
-        text-align: center;
         padding: 15px 0px;
     }
     p {
@@ -63,15 +60,15 @@
     }
 
     p > span {
-        border: 1px solid #444;
+        border: 1px solid var(--color-key-dark);
         margin-right: 5px;
-        padding: 10px;
         display: inline-flex;
         justify-content: center;
         align-items: center;
         width: 30px;
         height: 30px;
         border-radius: 3px;
+        font-size: 20px;
     }
 
     p > span.correct {
@@ -90,10 +87,6 @@
     }
 
     div {
-        padding: 5px 0px;
-    }
-
-    p:last-of-type {
-        margin-top: 20px;
+        margin: 30px 0px;
     }
 </style>

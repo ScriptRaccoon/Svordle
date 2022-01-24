@@ -21,19 +21,18 @@
 
 <style>
     .grid {
+        width: 90%;
         margin: 0 auto;
-        --size: min(95vw, 400px);
-        width: var(--size);
-        height: calc(1.25 * var(--size));
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         grid-template-rows: repeat(6, 1fr);
-        gap: calc(0.02 * var(--size));
+        gap: min(10px, 2vw);
+        font-size: min(60px, 12vw);
     }
 
     span {
-        font-size: calc(0.13 * var(--size));
-        border: 1px solid #444;
+        aspect-ratio: 1 / 1;
+        border: 1px solid var(--color-key-dark);
         display: flex;
         justify-content: center;
         align-items: center;

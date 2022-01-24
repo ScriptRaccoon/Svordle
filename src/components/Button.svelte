@@ -8,13 +8,13 @@
 <style>
     button {
         --size: min(20px, 4vw);
-        background: green;
+        background: var(--color-button);
         font-size: var(--size);
         padding: calc(0.5 * var(--size)) var(--size);
-        border-radius: 3px;
+        border-radius: 4px;
     }
 
     button:hover {
-        filter: brightness(1.2);
+        filter: brightness(1.3);
     }
 </style>
