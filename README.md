@@ -5,3 +5,7 @@ https://wordle-svelte.netlify.app
 This is a version of [Wordle](https://www.powerlanguage.co.uk/wordle/) made with Svelte.
 
 <img src="./public/img/screenshot.png" width="200px">
+ 
+It's also available in German.
+
+<img src="./public/img/screenshot-de.png" width="200px">
