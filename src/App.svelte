@@ -9,6 +9,7 @@
     import Help from "./components/Help.svelte";
     import Popup from "./components/Popup.svelte";
     import { copyStringToClipboard } from "./utils.js";
+    import { texts } from "./language.js";
 
     export let language = "en";
 
@@ -227,11 +228,20 @@
             <Grid {playing} {grid} {evaluation} currentRow={row} />
             <menu>
                 {#if column == 5 && playing}
-                    <Button text="Submit" action={handleSubmit} />
+                    <Button
+                        text={texts.submit[language]}
+                        action={handleSubmit}
+                    />
                 {/if}
-                <Button text="Restart" action={handleRestart} />
+                <Button
+                    text={texts.restart[language]}
+                    action={handleRestart}
+                />
                 {#if !playing}
-                    <Button text="Share" action={shareResult} />
+                    <Button
+                        text={texts.share[language]}
+                        action={shareResult}
+                    />
                 {/if}
             </menu>
             <Keyboard

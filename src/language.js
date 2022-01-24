@@ -31,4 +31,16 @@ export const texts = {
         en: "You can restart the game at any time. This also generates a new word for you.",
         de: "Du kannst das Spiel jederzeit neustarten. Dabei wird auch ein neues Wort für dich erzeugt.",
     },
+    submit: {
+        en: "Submit",
+        de: "Abschicken",
+    },
+    restart: {
+        en: "Restart",
+        de: "Neustart",
+    },
+    share: {
+        en: "Share",
+        de: "Teilen",
+    },
 };
