@@ -3598,7 +3598,6 @@ const words = {
         "neben",
         "nebst",
         "neffe",
-        "neger",
         "nelke",
         "netto",
         "neuer",
