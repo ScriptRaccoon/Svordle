@@ -48,8 +48,8 @@ export const texts = {
         de: "Ungültiges Wort",
     },
     won: {
-        en: "You won! 🎉",
-        de: "Gewonnen! 🎉",
+        en: "Correct! 🎉",
+        de: "Richtig! 🎉",
     },
     correct: {
         en: "The correct word was:",
