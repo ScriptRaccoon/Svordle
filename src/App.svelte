@@ -11,7 +11,9 @@
     import { copyStringToClipboard } from "./utils.js";
     import { texts } from "./language.js";
 
-    export let language = "en";
+    export let language = navigator.language.includes("de")
+        ? "de"
+        : "en";
 
     let screen = "home";
 
