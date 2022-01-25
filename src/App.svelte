@@ -38,7 +38,6 @@
 
     function initializeValues() {
         correctWord = generateRandomWord(language);
-        console.log(correctWord);
         playing = true;
         grid = new Array(SIZE.y)
             .fill("")
@@ -92,7 +91,6 @@
                 letterEvaluation[letter] = "incorrect";
             }
         }
-        console.log(evaluation[row]);
         if (evaluation[row].every((ev) => ev == "correct")) {
             won = true;
             showPopup(texts.won[language]);
