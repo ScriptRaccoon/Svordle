@@ -105,12 +105,9 @@
                 row++;
             } else {
                 if (!won)
-                    showPopup(
-                        `Gameover
-                        <br style="margin-bottom:20px">
-                        ${texts.correct[language]}<br style="margin-bottom:5px">
-                        ${correctWord}`
-                    );
+                    showPopup(`
+                        ${texts.correct[language]}<br>
+                        ${correctWord}`);
                 endGame();
             }
         }
