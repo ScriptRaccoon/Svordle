@@ -14,13 +14,18 @@
         <button
             title="English"
             class:active={language == "en"}
-            on:click={() => (language = "en")}>🇬🇧</button
+            on:click={() => (language = "en")}
         >
+            <img src="./img/flag-en.png" alt="English flag" />
+        </button>
+
         <button
             title="Deutsch"
             class:active={language == "de"}
-            on:click={() => (language = "de")}>🇩🇪</button
+            on:click={() => (language = "de")}
         >
+            <img src="./img/flag-de.png" alt="Deutsche Flagge" />
+        </button>
     </menu>
     <p>
         <Button text="Start" action={() => (screen = "game")} />
@@ -53,5 +58,10 @@
     menu button:hover,
     menu button.active {
         opacity: 1;
+    }
+
+    menu button img {
+        width: 50px;
+        border-radius: 4px;
     }
 </style>
