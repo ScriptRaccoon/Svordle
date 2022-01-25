@@ -41,8 +41,6 @@
 
 <style>
     section {
-        max-width: 500px;
-        margin: 0 auto;
         position: absolute;
         inset: 0;
         font-size: 18px;
