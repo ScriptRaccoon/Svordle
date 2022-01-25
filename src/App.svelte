@@ -107,9 +107,12 @@
                 row++;
             } else {
                 if (!won)
-                    showPopup(`
+                    showPopup(
+                        `
                         ${texts.correct[language]}<br>
-                        ${correctWord}`);
+                        ${correctWord}`,
+                        5000
+                    );
                 endGame();
             }
         }
@@ -119,9 +122,12 @@
         playing = false;
     }
 
-    function showPopup(text) {
+    function showPopup(text, duration = 1500) {
         popupText = text;
         popup = true;
+        setTimeout(() => {
+            popup = false;
+        }, duration);
     }
 
     function shareResult() {
@@ -146,9 +152,6 @@
         }
         copyStringToClipboard(result);
         showPopup(texts.clipboard[language]);
-        setTimeout(() => {
-            popup = false;
-        }, 1500);
     }
 
     function handleRestart() {
