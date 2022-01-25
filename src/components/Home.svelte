@@ -30,6 +30,13 @@
     <p>
         <Button text="Start" action={() => (screen = "game")} />
     </p>
+    <aside>
+        <a
+            href="https://github.com/ScriptRaccoon/Wordle"
+            target="_blank"
+            >Made by Script Raccoon
+        </a>
+    </aside>
 </section>
 
 <style>
@@ -63,5 +70,14 @@
     menu button img {
         width: 50px;
         border-radius: 4px;
+    }
+    aside {
+        position: fixed;
+        bottom: 20px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        opacity: 0.5;
+        font-size: 14px;
     }
 </style>
