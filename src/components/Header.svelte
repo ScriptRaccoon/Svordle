@@ -17,7 +17,7 @@
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
-        font-size: min(30px, 6vw);
+        font-size: min(30px, 7vw);
         padding: 10px 5px;
     }
     button {
