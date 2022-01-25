@@ -1,13 +1,18 @@
 <script>
     export let grid = [];
     export let evaluation = [];
-    export let columnIndices = [0, 1, 2, 3, 4];
-    export let rowIndices = [0, 1, 2, 3, 4, 5];
+    export let SIZE = {};
+    export let columnIndices = new Array(SIZE.x)
+        .fill(0)
+        .map((x, i) => i);
+    export let rowIndices = new Array(SIZE.y)
+        .fill(0)
+        .map((x, i) => i);
     export let currentRow = 1;
     export let playing = true;
 </script>
 
-<div class="grid">
+<div class="grid" style="--cols: {SIZE.x}; --rows: {SIZE.y}">
     {#each rowIndices as row}
         {#each columnIndices as column}
             <span
@@ -24,8 +29,8 @@
         width: 90%;
         margin: 0 auto;
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-template-rows: repeat(6, 1fr);
+        grid-template-columns: repeat(var(--cols), 1fr);
+        grid-template-rows: repeat(var(--rows), 1fr);
         gap: min(10px, 2vw);
         font-size: min(60px, 12vw);
     }

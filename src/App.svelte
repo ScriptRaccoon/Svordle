@@ -1,13 +1,13 @@
 <script>
-    import { fade } from "svelte/transition";
     import Header from "./components/Header.svelte";
     import Grid from "./components/Grid.svelte";
     import Keyboard from "./components/Keyboard.svelte";
     import Button from "./components/Button.svelte";
-    import { generateRandomWord, isValidWord } from "./words.js";
     import Home from "./components/Home.svelte";
     import Help from "./components/Help.svelte";
     import Popup from "./components/Popup.svelte";
+    import { fade } from "svelte/transition";
+    import { generateRandomWord, isValidWord } from "./words.js";
     import { copyStringToClipboard } from "./utils.js";
     import { texts } from "./language.js";
     import { allKeys } from "./keys.js";
@@ -17,6 +17,8 @@
         : "en";
 
     let screen = "home";
+
+    const SIZE = { x: 5, y: 6 };
 
     $: keys = allKeys[language];
 
@@ -37,12 +39,12 @@
     function initializeValues() {
         correctWord = generateRandomWord(language);
         playing = true;
-        grid = new Array(6)
+        grid = new Array(SIZE.y)
             .fill("")
-            .map((i) => new Array(5).fill(""));
-        evaluation = new Array(6)
+            .map((i) => new Array(SIZE.x).fill(""));
+        evaluation = new Array(SIZE.y)
             .fill(0)
-            .map((i) => new Array(5).fill(null));
+            .map((i) => new Array(SIZE.y).fill(null));
         row = 0;
         column = 0;
         letterEvaluation = Object.fromEntries(
@@ -61,7 +63,7 @@
         const key = e.detail;
         if (key != "Backspace") {
             grid[row][column] = key;
-            if (column < 5) column++;
+            if (column < SIZE.x) column++;
         } else {
             if (column > 0) {
                 column--;
@@ -75,7 +77,7 @@
             showPopup(texts.notValid[language]);
             return false;
         }
-        for (let index = 0; index < 5; index++) {
+        for (let index = 0; index < SIZE.x; index++) {
             const letter = grid[row][index];
             if (correctWord[index] == letter) {
                 evaluation[row][index] = "correct";
@@ -98,9 +100,9 @@
     }
 
     function handleSubmit() {
-        if (column != 5) return;
+        if (column != SIZE.x) return;
         if (evaluateWord()) {
-            if (playing && row < 5) {
+            if (playing && row < SIZE.y - 1) {
                 column = 0;
                 row++;
             } else {
@@ -127,7 +129,7 @@
         result += won ? (row + 1).toString() : "X";
         result += "/6\n\n";
         for (let i = 0; i <= row; i++) {
-            for (let j = 0; j < 5; j++) {
+            for (let j = 0; j < SIZE.x; j++) {
                 switch (evaluation[i][j]) {
                     case "correct":
                         result += "🟩";
@@ -169,9 +171,15 @@
     {:else if screen == "game"}
         <div transition:fade={{ duration: 200 }}>
             <Header bind:screen />
-            <Grid {playing} {grid} {evaluation} currentRow={row} />
+            <Grid
+                {SIZE}
+                {playing}
+                {grid}
+                {evaluation}
+                currentRow={row}
+            />
             <menu>
-                {#if column == 5 && playing}
+                {#if column == SIZE.x && playing}
                     <Button
                         text={texts.submit[language]}
                         action={handleSubmit}
