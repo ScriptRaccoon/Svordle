@@ -10,6 +10,7 @@
     import Popup from "./components/Popup.svelte";
     import { copyStringToClipboard } from "./utils.js";
     import { texts } from "./language.js";
+    import { allKeys } from "./keys.js";
 
     export let language = navigator.language.includes("de")
         ? "de"
@@ -17,70 +18,7 @@
 
     let screen = "home";
 
-    $: keys =
-        language == "en"
-            ? [
-                  "Q",
-                  "W",
-                  "E",
-                  "R",
-                  "T",
-                  "Y",
-                  "U",
-                  "I",
-                  "O",
-                  "P",
-                  "A",
-                  "S",
-                  "D",
-                  "F",
-                  "G",
-                  "H",
-                  "J",
-                  "K",
-                  "L",
-                  "Z",
-                  "X",
-                  "C",
-                  "V",
-                  "B",
-                  "N",
-                  "M",
-                  "Backspace",
-              ]
-            : [
-                  "Q",
-                  "W",
-                  "E",
-                  "R",
-                  "T",
-                  "Z",
-                  "U",
-                  "I",
-                  "O",
-                  "P",
-                  "Ü",
-                  "A",
-                  "S",
-                  "D",
-                  "F",
-                  "G",
-                  "H",
-                  "J",
-                  "K",
-                  "L",
-                  "Ö",
-                  "Ä",
-                  "Y",
-                  "X",
-                  "C",
-                  "V",
-                  "B",
-                  "N",
-                  "M",
-                  "ß",
-                  "Backspace",
-              ];
+    $: keys = allKeys[language];
 
     $: letters = keys.filter((key) => key.length == 1);
 
