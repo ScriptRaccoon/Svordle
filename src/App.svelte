@@ -38,13 +38,14 @@
 
     function initializeValues() {
         correctWord = generateRandomWord(language);
+        console.log(correctWord);
         playing = true;
         grid = new Array(SIZE.y)
             .fill("")
             .map((i) => new Array(SIZE.x).fill(""));
         evaluation = new Array(SIZE.y)
             .fill(0)
-            .map((i) => new Array(SIZE.y).fill(null));
+            .map((i) => new Array(SIZE.x).fill(null));
         row = 0;
         column = 0;
         letterEvaluation = Object.fromEntries(
@@ -91,6 +92,7 @@
                 letterEvaluation[letter] = "incorrect";
             }
         }
+        console.log(evaluation[row]);
         if (evaluation[row].every((ev) => ev == "correct")) {
             won = true;
             showPopup(texts.won[language]);
