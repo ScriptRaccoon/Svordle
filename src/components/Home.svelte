@@ -9,23 +9,16 @@
 <section transition:fade={{ duration: 200 }}>
     <h1>Wordle</h1>
     <p>{texts.subtitle[language]}</p>
-
     <menu>
-        <button
-            title="English"
-            class:active={language == "en"}
-            on:click={() => (language = "en")}
-        >
-            <img src="./img/flag-en.png" alt="English flag" />
-        </button>
-
-        <button
-            title="Deutsch"
-            class:active={language == "de"}
-            on:click={() => (language = "de")}
-        >
-            <img src="./img/flag-de.png" alt="Deutsche Flagge" />
-        </button>
+        {#each ["en", "de"] as lan}
+            <button
+                title={texts.languageTerm[lan]}
+                class:active={language == lan}
+                on:click={() => (language = lan)}
+            >
+                <img src="./img/flag-{lan}.png" alt="flag" />
+            </button>
+        {/each}
     </menu>
     <p>
         <Button text="Start" action={() => (screen = "game")} />

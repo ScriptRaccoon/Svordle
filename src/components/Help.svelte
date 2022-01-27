@@ -10,29 +10,21 @@
     <h2 class="center">{texts.helpTitle[language]}</h2>
     <p>{texts.help1[language]}</p>
     <p>{texts.help2[language]}</p>
-    <div>
-        <p class="center">
-            <span class="correct">A</span><span>P</span><span>P</span
-            ><span>L</span><span>E</span>
-        </p>
-        <p>{texts.help3[language]}</p>
-    </div>
-
-    <div>
-        <p class="center">
-            <span>D</span><span class="almost">R</span><span>U</span
-            ><span>M</span><span>S</span>
-        </p>
-        <p>{texts.help4[language]}</p>
-    </div>
-    <div>
-        <p class="center">
-            <span>C</span><span>H</span><span>A</span><span
-                class="incorrect">O</span
-            ><span>S</span>
-        </p>
-        <p>{texts.help5[language]}</p>
-    </div>
+    {#each texts.exampleWords[language] as word, j}
+        <div>
+            <p class="center">
+                {#each word.split("") as letter, i}
+                    <span
+                        class:correct={i == j && j == 0}
+                        class:almost={i == j && j == 1}
+                        class:incorrect={i == j + 1 && j == 2}
+                        >{letter}</span
+                    >
+                {/each}
+            </p>
+            <p>{texts[`help${j + 3}`][language]}</p>
+        </div>
+    {/each}
     <p>{texts.help6[language]}</p>
     <p class="center">
         <Button text="Start" action={() => (screen = "game")} />

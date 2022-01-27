@@ -63,4 +63,12 @@ export const texts = {
         en: "Sure?",
         de: "Sicher?",
     },
+    exampleWords: {
+        en: ["APPLE", "DRUMS", "CHAOS"],
+        de: ["APFEL", "GRÖßE", "CHAOS"],
+    },
+    languageTerm: {
+        en: "English",
+        de: "Deutsch",
+    },
 };

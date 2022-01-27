@@ -100,7 +100,7 @@
     }
 
     function handleSubmit() {
-        if (column != SIZE.x) return;
+        if (column != SIZE.x || !playing) return;
         if (evaluateWord()) {
             if (playing && row < SIZE.y - 1) {
                 column = 0;
@@ -172,7 +172,7 @@
     {:else if screen == "help"}
         <Help {language} bind:screen />
     {:else if screen == "game"}
-        <div transition:fade={{ duration: 200 }}>
+        <section transition:fade={{ duration: 200 }}>
             <Header bind:screen />
             <Grid
                 {SIZE}
@@ -207,7 +207,7 @@
                 {keys}
                 on:key={handleKeyInput}
             />
-        </div>
+        </section>
     {/if}
     {#if popup}
         <Popup bind:popup {popupText} />

@@ -12,7 +12,7 @@
     export let playing = true;
 </script>
 
-<div class="grid" style="--cols: {SIZE.x}; --rows: {SIZE.y}">
+<div class="grid" style:--cols={SIZE.x} style:--rows={SIZE.y}>
     {#each rowIndices as row}
         {#each columnIndices as column}
             <span
