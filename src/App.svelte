@@ -131,7 +131,8 @@
     }
 
     function shareResult() {
-        let result = "Wordle ";
+        const languageSymbol = language == "de" ? "🇩🇪" : "🇬🇧";
+        let result = `Wordle ${languageSymbol} `;
         result += won ? (row + 1).toString() : "X";
         result += "/6\n\n";
         for (let i = 0; i <= row; i++) {
