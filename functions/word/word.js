@@ -1,15 +1,27 @@
-// Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
 const handler = async (event) => {
     try {
         const language = event.queryStringParameters.language;
-        const index = Math.floor(
-            Math.random() * words[language].length
-        );
-        const word = words[language][index].toUpperCase();
-        return {
-            statusCode: 200,
-            body: JSON.stringify({ word }),
-        };
+        if (!["de", "en"].includes(language))
+            throw "Invalid language";
+        const word = event.queryStringParameters.word;
+        if (!word) {
+            const index = Math.floor(
+                Math.random() * words[language].length
+            );
+            const word = words[language][index].toUpperCase();
+            return {
+                statusCode: 200,
+                body: JSON.stringify({ word }),
+            };
+        } else {
+            const isValid = words[language].includes(
+                word.toLowerCase()
+            );
+            return {
+                statusCode: 200,
+                body: JSON.stringify({ isValid }),
+            };
+        }
     } catch (error) {
         return { statusCode: 500, body: error.toString() };
     }

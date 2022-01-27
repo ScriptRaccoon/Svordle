@@ -7,7 +7,6 @@
     import Help from "./components/Help.svelte";
     import Popup from "./components/Popup.svelte";
     import { fade } from "svelte/transition";
-    import { isValidWord } from "./words.js";
     import { copyStringToClipboard } from "./utils.js";
     import { texts } from "./language.js";
     import { allKeys } from "./keys.js";
@@ -87,8 +86,24 @@
         }
     }
 
-    function evaluateWord() {
-        if (!isValidWord(grid[row].join(""), language)) {
+    async function isValidWord(word) {
+        try {
+            const res = await fetch(
+                `/.netlify/functions/word?language=${language}&word=${word}`
+            );
+            if (!res.ok) throw "Word could not be evaluated";
+            const data = await res.json();
+            return data.isValid;
+        } catch (err) {
+            window.alert("Word could not be evaluated");
+            return false;
+        }
+    }
+
+    async function evaluateWord() {
+        const word = grid[row].join("");
+        const isValid = await isValidWord(word);
+        if (!isValid) {
             showPopup(texts.notValid[language]);
             return false;
         }
@@ -114,9 +129,9 @@
         return true;
     }
 
-    function handleSubmit() {
+    async function handleSubmit() {
         if (column != SIZE.x || !playing) return;
-        if (evaluateWord()) {
+        if (await evaluateWord()) {
             if (playing && row < SIZE.y - 1) {
                 column = 0;
                 row++;
