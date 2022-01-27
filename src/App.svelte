@@ -7,7 +7,7 @@
     import Help from "./components/Help.svelte";
     import Popup from "./components/Popup.svelte";
     import { fade } from "svelte/transition";
-    import { generateRandomWord, isValidWord } from "./words.js";
+    import { isValidWord } from "./words.js";
     import { copyStringToClipboard } from "./utils.js";
     import { texts } from "./language.js";
     import { allKeys } from "./keys.js";
@@ -36,8 +36,22 @@
         won,
         confirm;
 
-    function initializeValues() {
-        correctWord = generateRandomWord(language);
+    async function generateRandomWord() {
+        try {
+            const res = await fetch(
+                `/.netlify/functions/word?language=${language}`
+            );
+            if (!res.ok) throw "Word could not be loaded";
+            const data = await res.json();
+            if (!data.word) throw "Word could not be loaded";
+            return data.word;
+        } catch (err) {
+            window.alert("Word could not be loaded");
+        }
+    }
+
+    async function initializeValues() {
+        correctWord = await generateRandomWord();
         if (!isProduction) console.log(correctWord);
         playing = true;
         grid = new Array(SIZE.y)
