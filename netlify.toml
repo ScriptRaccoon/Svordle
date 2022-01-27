@@ -1,0 +1,8 @@
+[build]
+    publish = "public/"
+    functions = "functions/"
+
+[dev]
+    publish = "public/"
+    functions = "functions/"
+    targetPort = 8080
