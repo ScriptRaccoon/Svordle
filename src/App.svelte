@@ -38,6 +38,7 @@
 
     function initializeValues() {
         correctWord = generateRandomWord(language);
+        if (!isProduction) console.log(correctWord);
         playing = true;
         grid = new Array(SIZE.y)
             .fill("")
