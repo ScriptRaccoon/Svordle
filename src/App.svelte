@@ -23,7 +23,7 @@
 
     $: letters = keys.filter((key) => key.length == 1);
 
-    let correctWord,
+    let correctWordIndex,
         playing,
         grid,
         evaluation,
@@ -35,30 +35,29 @@
         won,
         confirm;
 
-    async function generateRandomWord() {
+    async function generateRandomWordIndex() {
         try {
             const res = await fetch(
                 `/.netlify/functions/word?language=${language}`
             );
             if (!res.ok) throw "Word could not be loaded";
-            const data = await res.json();
-            if (!data.word) throw "Word could not be loaded";
-            return data.word;
-        } catch (err) {
+            const { index } = await res.json();
+            return index;
+        } catch (error) {
+            console.log(error);
             window.alert("Word could not be loaded");
         }
     }
 
     async function initializeValues() {
-        correctWord = await generateRandomWord();
-        if (!isProduction) console.log(correctWord);
+        correctWordIndex = await generateRandomWordIndex();
         playing = true;
         grid = new Array(SIZE.y)
             .fill("")
-            .map((i) => new Array(SIZE.x).fill(""));
+            .map(() => new Array(SIZE.x).fill(""));
         evaluation = new Array(SIZE.y)
             .fill(0)
-            .map((i) => new Array(SIZE.x).fill(null));
+            .map(() => new Array(SIZE.x).fill(null));
         row = 0;
         column = 0;
         letterEvaluation = Object.fromEntries(
@@ -66,7 +65,7 @@
         );
         popup = false;
         popupText = "";
-        won = false;
+        won = null;
         confirm = false;
     }
 
@@ -86,64 +85,71 @@
         }
     }
 
-    async function isValidWord(word) {
+    async function getEvaluation() {
+        const word = grid[row].join("");
         try {
             const res = await fetch(
-                `/.netlify/functions/word?language=${language}&word=${word}`
+                `/.netlify/functions/word?language=${language}&word=${word}&index=${correctWordIndex}`
             );
-            if (!res.ok) throw "Word could not be evaluated";
-            const data = await res.json();
-            return data.isValid;
-        } catch (err) {
-            window.alert("Word could not be evaluated");
-            return false;
+            if (!res.ok) throw `Could not evaluate ${word}`;
+            const { evaluation: ev } = await res.json();
+            return ev;
+        } catch (error) {
+            console.log(error);
+            window.alert(`Could not evaluate ${word}`);
         }
     }
 
-    async function evaluateWord() {
-        const word = grid[row].join("");
-        const isValid = await isValidWord(word);
-        if (!isValid) {
-            showPopup(texts.notValid[language]);
-            return false;
-        }
-        for (let index = 0; index < SIZE.x; index++) {
-            const letter = grid[row][index];
-            if (correctWord[index] == letter) {
-                evaluation[row][index] = "correct";
-                letterEvaluation[letter] = "correct";
-            } else if (correctWord.includes(letter)) {
-                evaluation[row][index] = "almost";
-                if (letterEvaluation[letter] != "correct")
-                    letterEvaluation[letter] = "almost";
-            } else {
-                evaluation[row][index] = "incorrect";
-                letterEvaluation[letter] = "incorrect";
-            }
-        }
-        if (evaluation[row].every((ev) => ev == "correct")) {
-            won = true;
-            showPopup(texts.won[language]);
-            endGame();
-        }
-        return true;
-    }
+    // async function evaluateWord() {
+    //     const word = grid[row].join("");
+
+    //     const isValid = await isValidWord(word);
+    //     if (!isValid) {
+    //         showPopup(texts.notValid[language]);
+    //         return false;
+    //     }
+    //     for (let index = 0; index < SIZE.x; index++) {
+    //         const letter = grid[row][index];
+    //         if (correctWord[index] == letter) {
+    //             evaluation[row][index] = "correct";
+    //             letterEvaluation[letter] = "correct";
+    //         } else if (correctWord.includes(letter)) {
+    //             evaluation[row][index] = "almost";
+    //             if (letterEvaluation[letter] != "correct")
+    //                 letterEvaluation[letter] = "almost";
+    //         } else {
+    //             evaluation[row][index] = "incorrect";
+    //             letterEvaluation[letter] = "incorrect";
+    //         }
+    //     }
+    //     if (evaluation[row].every((ev) => ev == "correct")) {
+    //         won = true;
+    //         showPopup(texts.won[language]);
+    //         endGame();
+    //     }
+    //     return true;
+    // }
 
     async function handleSubmit() {
         if (column != SIZE.x || !playing) return;
-        if (await evaluateWord()) {
-            if (playing && row < SIZE.y - 1) {
-                column = 0;
-                row++;
-            } else {
-                if (!won)
-                    showPopup(
-                        `
-                        ${texts.correct[language]}<br>
-                        ${correctWord}`,
-                        5000
-                    );
+        const ev = await getEvaluation();
+        if (!ev.valid) {
+            showPopup(texts.notValid[language]);
+        } else {
+            evaluation[row] = ev.letters;
+            if (evaluation[row].every((x) => x == "correct")) {
+                won = true;
+                showPopup(texts.won[language]);
                 endGame();
+            } else {
+                if (row < SIZE.y - 1) {
+                    column = 0;
+                    row++;
+                } else {
+                    won = false;
+                    showPopup("Gameover");
+                    endGame();
+                }
             }
         }
     }

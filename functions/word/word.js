@@ -8,21 +8,52 @@ const handler = async (event) => {
             const index = Math.floor(
                 Math.random() * words[language].length
             );
-            const word = words[language][index].toUpperCase();
+            console.log({ index });
+
+            const correctWord = words[language][index];
+            console.log({ correctWord });
+
             return {
                 statusCode: 200,
-                body: JSON.stringify({ word }),
+                body: JSON.stringify({ index }),
             };
         } else {
-            const isValid = words[language].includes(
-                word.toLowerCase()
-            );
+            const correctIndex = event.queryStringParameters.index;
+            console.log({ correctIndex });
+            const evaluation = { valid: false, letters: [] };
+            const correctWord = words[language][correctIndex];
+            console.log({ correctWord });
+            if (word == correctWord) {
+                evaluation.valid = true;
+                evaluation.letters = word
+                    .split("")
+                    .map(() => "correct");
+            } else {
+                evaluation.valid = words[language].includes(
+                    word.toLowerCase()
+                );
+                if (evaluation.valid) {
+                    for (let i = 0; i < word.length; i++) {
+                        const letter = word[i].toLowerCase();
+                        evaluation.letters[i] =
+                            letter == correctWord[i]
+                                ? "correct"
+                                : correctWord.includes(letter)
+                                ? "almost"
+                                : "incorrect";
+                    }
+                }
+            }
+
+            console.log({ evaluation });
+
             return {
                 statusCode: 200,
-                body: JSON.stringify({ isValid }),
+                body: JSON.stringify({ evaluation }),
             };
         }
     } catch (error) {
+        console.log(error);
         return { statusCode: 500, body: error.toString() };
     }
 };
