@@ -98,36 +98,6 @@
         }
     }
 
-    // async function evaluateWord() {
-    //     const word = grid[row].join("");
-
-    //     const isValid = await isValidWord(word);
-    //     if (!isValid) {
-    //         showPopup(texts.notValid[language]);
-    //         return false;
-    //     }
-    //     for (let index = 0; index < SIZE.x; index++) {
-    //         const letter = grid[row][index];
-    //         if (correctWord[index] == letter) {
-    //             evaluation[row][index] = "correct";
-    //             letterEvaluation[letter] = "correct";
-    //         } else if (correctWord.includes(letter)) {
-    //             evaluation[row][index] = "almost";
-    //             if (letterEvaluation[letter] != "correct")
-    //                 letterEvaluation[letter] = "almost";
-    //         } else {
-    //             evaluation[row][index] = "incorrect";
-    //             letterEvaluation[letter] = "incorrect";
-    //         }
-    //     }
-    //     if (evaluation[row].every((ev) => ev == "correct")) {
-    //         won = true;
-    //         showPopup(texts.won[language]);
-    //         endGame();
-    //     }
-    //     return true;
-    // }
-
     async function handleSubmit() {
         if (column != SIZE.x || !playing) return;
         const ev = await getEvaluation();
