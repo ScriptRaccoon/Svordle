@@ -37,9 +37,7 @@
 
     async function generateRandomWordIndex() {
         try {
-            const res = await fetch(
-                `/.netlify/functions/word?language=${language}`
-            );
+            const res = await fetch(`/api/word?language=${language}`);
             if (!res.ok) throw "Word could not be loaded";
             const { index } = await res.json();
             return index;
@@ -89,7 +87,7 @@
         const word = grid[row].join("");
         try {
             const res = await fetch(
-                `/.netlify/functions/word?language=${language}&word=${word}&index=${correctWordIndex}`
+                `/api/word?language=${language}&word=${word}&index=${correctWordIndex}`
             );
             if (!res.ok) throw `Could not evaluate ${word}`;
             const { evaluation: ev } = await res.json();
