@@ -1,4 +1,8 @@
-const words = require("../wordlist.js");
+const words = {
+    de: require("../words_de.js"),
+    en: require("../words_en.js"),
+};
+
 const { decrypt } = require("../encryption.js");
 
 const handler = async (event) => {

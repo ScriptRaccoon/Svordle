@@ -1,4 +1,8 @@
-const words = require("../wordlist.js");
+const words = {
+    de: require("../words_de.js"),
+    en: require("../words_en.js"),
+};
+
 const { encrypt } = require("../encryption.js");
 const { randomElement } = require("../utils.js");
 
