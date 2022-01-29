@@ -3,5 +3,7 @@
 
 .DS_Store
 todo.txt
+data/german.txt
+data/output.js
 # Local Netlify folder
 .netlify

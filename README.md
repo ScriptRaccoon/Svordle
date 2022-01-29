@@ -11,3 +11,6 @@ This is a version of [Wordle](https://www.powerlanguage.co.uk/wordle/) made with
 <br>
  
 The backend uses Netlify's serverless functions. The correct word is never visible to the client. Notice that in the [Original Wordle](https://www.powerlanguage.co.uk/wordle/) the correct word is visible in the browser's localStorage, which makes it possible to cheat.
+
+The German word list is generated from
+https://sourceforge.net/projects/germandict/files/
