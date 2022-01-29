@@ -87,7 +87,7 @@
         const word = grid[row].join("");
         try {
             const res = await fetch(
-                `/api/word?language=${language}&word=${word}&code=${code}`
+                `/api/evaluate?language=${language}&word=${word}&code=${code}`
             );
             if (!res.ok) throw `Could not evaluate ${word}`;
             const { evaluation: ev } = await res.json();
