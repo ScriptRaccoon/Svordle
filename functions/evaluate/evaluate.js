@@ -1,4 +1,5 @@
 const words = require("../wordlist.js");
+const { decrypt } = require("../encryption.js");
 
 const handler = async (event) => {
     try {
@@ -9,12 +10,9 @@ const handler = async (event) => {
         if (!word) throw "No word provided";
         const code = event.queryStringParameters.code;
         if (!code) throw "No code provided";
-        const index = parseInt(code, 16);
-        const actualIndex =
-            (index + parseInt(process.env.SHIFT)) %
-            words[language].length;
+        const correctWord = decrypt(code);
+        console.log({ word, correctWord });
         const evaluation = { valid: false, letters: [] };
-        const correctWord = words[language][actualIndex];
         if (word == correctWord) {
             evaluation.valid = true;
             evaluation.letters = word.split("").map(() => "correct");

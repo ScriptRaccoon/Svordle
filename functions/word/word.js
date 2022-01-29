@@ -1,19 +1,15 @@
 const words = require("../wordlist.js");
+const { encrypt } = require("../encryption.js");
+const { randomElement } = require("../utils.js");
 
 const handler = async (event) => {
     try {
         const language = event.queryStringParameters.language;
         if (!["de", "en"].includes(language))
             throw "Invalid language";
-        const index = Math.floor(
-            Math.random() * words[language].length
-        );
-        const code = index.toString(16);
-        const actualIndex =
-            (index + parseInt(process.env.SHIFT)) %
-            words[language].length;
-        const correctWord = words[language][actualIndex];
+        const correctWord = randomElement(words[language]);
         console.log({ correctWord });
+        const code = encrypt(correctWord);
         return {
             statusCode: 200,
             body: JSON.stringify({ code }),
