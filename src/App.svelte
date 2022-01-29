@@ -137,6 +137,7 @@
             showPopup(texts.notValid[language]);
         } else {
             evaluation[row] = ev.letters;
+            updateLetterEvaluation();
             if (evaluation[row].every((x) => x == "correct")) {
                 won = true;
                 showPopup(texts.won[language]);
@@ -150,6 +151,22 @@
                     showPopup("Gameover");
                     endGame();
                 }
+            }
+        }
+    }
+
+    function updateLetterEvaluation() {
+        for (let index = 0; index < SIZE.x; index++) {
+            const letter = grid[row][index];
+            if (evaluation[row][index] == "correct") {
+                letterEvaluation[letter] = "correct";
+            } else if (
+                evaluation[row][index] == "almost" &&
+                letterEvaluation[letter] != "correct"
+            ) {
+                letterEvaluation[letter] = "almost";
+            } else {
+                letterEvaluation[letter] = "incorrect";
             }
         }
     }
