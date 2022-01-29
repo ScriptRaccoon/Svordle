@@ -1,12 +1,12 @@
-# Wordle made with Svelte
+# Wordle made with Svelte (Serverless version)
 
-https://wordle-svelte.netlify.app
+https://wordle-svelte-serverless.netlify.app
 
 This is a version of [Wordle](https://www.powerlanguage.co.uk/wordle/) made with Svelte. You can choose between English and German.
 
 <div style="display:flex;gap:20px">
-<img src="./public/img/screenshot.png" width="200px">
-<img src="./public/img/screenshot-de.png" width="200px">
+<img src="./public/img/screenshot.png" height="300px">
+<img src="./public/img/screenshot-de.png" height="300px">
 </div>
 <br>
  
