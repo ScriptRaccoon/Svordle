@@ -3,38 +3,48 @@ const handler = async (event) => {
         const language = event.queryStringParameters.language;
         if (!["de", "en"].includes(language))
             throw "Invalid language";
-        const word = event.queryStringParameters.word;
+        const word = event.queryStringParameters.word?.toLowerCase();
         if (!word) {
             const index = Math.floor(
                 Math.random() * words[language].length
             );
             console.log({ index });
 
+            const code = index.toString(16);
+
+            console.log({ code });
+
             const correctWord = words[language][index];
             console.log({ correctWord });
 
             return {
                 statusCode: 200,
-                body: JSON.stringify({ index }),
+                body: JSON.stringify({ code }),
             };
         } else {
-            const correctIndex = event.queryStringParameters.index;
-            console.log({ correctIndex });
+            console.log({ word });
+
+            const code = event.queryStringParameters.code;
+            console.log({ code });
+
+            const index = parseInt(code, 16);
+            console.log({ index });
+
             const evaluation = { valid: false, letters: [] };
-            const correctWord = words[language][correctIndex];
+
+            const correctWord = words[language][index];
             console.log({ correctWord });
+
             if (word == correctWord) {
                 evaluation.valid = true;
                 evaluation.letters = word
                     .split("")
                     .map(() => "correct");
             } else {
-                evaluation.valid = words[language].includes(
-                    word.toLowerCase()
-                );
+                evaluation.valid = words[language].includes(word);
                 if (evaluation.valid) {
                     for (let i = 0; i < word.length; i++) {
-                        const letter = word[i].toLowerCase();
+                        const letter = word[i];
                         evaluation.letters[i] =
                             letter == correctWord[i]
                                 ? "correct"

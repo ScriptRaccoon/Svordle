@@ -23,7 +23,7 @@
 
     $: letters = keys.filter((key) => key.length == 1);
 
-    let correctWordIndex,
+    let code,
         playing,
         grid,
         evaluation,
@@ -35,12 +35,12 @@
         won,
         confirm;
 
-    async function generateRandomWordIndex() {
+    async function generateCode() {
         try {
             const res = await fetch(`/api/word?language=${language}`);
             if (!res.ok) throw "Word could not be loaded";
-            const { index } = await res.json();
-            return index;
+            const { code } = await res.json();
+            return code;
         } catch (error) {
             console.log(error);
             window.alert("Word could not be loaded");
@@ -48,7 +48,7 @@
     }
 
     async function initializeValues() {
-        correctWordIndex = await generateRandomWordIndex();
+        code = await generateCode();
         playing = true;
         grid = new Array(SIZE.y)
             .fill("")
@@ -87,7 +87,7 @@
         const word = grid[row].join("");
         try {
             const res = await fetch(
-                `/api/word?language=${language}&word=${word}&index=${correctWordIndex}`
+                `/api/word?language=${language}&word=${word}&code=${code}`
             );
             if (!res.ok) throw `Could not evaluate ${word}`;
             const { evaluation: ev } = await res.json();
