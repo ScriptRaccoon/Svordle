@@ -10,6 +10,4 @@ This is a version of [Wordle](https://www.powerlanguage.co.uk/wordle/) made with
 </div>
 <br>
  
-The backend uses Netlify's serverless functions. The correct word is never visible to the client*. Notice that in the [Original Wordle](https://www.powerlanguage.co.uk/wordle/) the correct word is visible in the browser's localStorage, which makes it possible to cheat.
-
-\*With some effort you can reconstruct it from the code here, though.
+The backend uses Netlify's serverless functions. The correct word is never visible to the client. Notice that in the [Original Wordle](https://www.powerlanguage.co.uk/wordle/) the correct word is visible in the browser's localStorage, which makes it possible to cheat.
