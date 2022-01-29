@@ -14,9 +14,15 @@ const handler = async (event) => {
         const index = parseInt(code, 16);
         console.log({ index });
 
+        const actualIndex =
+            (index + parseInt(process.env.SHIFT)) %
+            words[language].length;
+
+        console.log({ actualIndex });
+
         const evaluation = { valid: false, letters: [] };
 
-        const correctWord = words[language][index];
+        const correctWord = words[language][actualIndex];
         console.log({ correctWord });
 
         if (word == correctWord) {

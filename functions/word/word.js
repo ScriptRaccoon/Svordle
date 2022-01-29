@@ -1,6 +1,7 @@
 const words = require("../wordlist.js");
 
 const handler = async (event) => {
+    console.log(process.env.SHIFT);
     try {
         const language = event.queryStringParameters.language;
         if (!["de", "en"].includes(language))
@@ -15,7 +16,14 @@ const handler = async (event) => {
 
         console.log({ code });
 
-        const correctWord = words[language][index];
+        const actualIndex =
+            (index + parseInt(process.env.SHIFT)) %
+            words[language].length;
+
+        console.log({ actualIndex });
+
+        const correctWord = words[language][actualIndex];
+
         console.log({ correctWord });
 
         return {
