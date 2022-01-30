@@ -3,5 +3,6 @@
 
 .DS_Store
 todo.txt
+notes.txt
 # Local Netlify folder
 .netlify
