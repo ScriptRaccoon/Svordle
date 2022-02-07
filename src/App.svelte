@@ -132,16 +132,8 @@
     function updateLetterEvaluation() {
         for (let index = 0; index < $WORD_LENGTH; index++) {
             const letter = grid[row][index];
-            if (evaluation[row][index] == "correct") {
-                letterEvaluation[letter] = "correct";
-            } else if (
-                evaluation[row][index] == "present" &&
-                letterEvaluation[letter] != "correct"
-            ) {
-                letterEvaluation[letter] = "present";
-            } else {
-                letterEvaluation[letter] = "absent";
-            }
+            if (letterEvaluation[letter] == "correct") continue;
+            letterEvaluation[letter] = evaluation[row][index];
         }
     }
 
