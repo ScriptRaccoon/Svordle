@@ -2,6 +2,8 @@
     export let key = "";
     export let evaluation;
 
+    import { customUpperCase } from "../keys.js";
+
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
 
@@ -25,7 +27,7 @@
     {#if key == "Backspace"}
         <i class="fas fa-backspace" />
     {:else}
-        {key}
+        {@html customUpperCase(key)}
     {/if}
 </button>
 

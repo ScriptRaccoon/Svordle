@@ -11,6 +11,7 @@ const handler = async (event) => {
         const language = event.queryStringParameters.language;
         if (!["de", "en"].includes(language))
             throw "Invalid language";
+
         const correctWord = randomElement(words[language]);
         const code = encrypt(correctWord);
         console.log({ correctWord });

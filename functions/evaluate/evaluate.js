@@ -10,7 +10,7 @@ const handler = async (event) => {
         const language = event.queryStringParameters.language;
         if (!["de", "en"].includes(language))
             throw "Invalid language";
-        const word = event.queryStringParameters.word?.toLowerCase();
+        const word = event.queryStringParameters.word;
         if (!word) throw "No word provided";
         const code = event.queryStringParameters.code;
         if (!code) throw "No code provided";

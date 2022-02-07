@@ -1,4 +1,5 @@
 <script>
+    import { customUpperCase } from "../keys.js";
     export let grid = [];
     export let evaluation = [];
     export let WORD_LENGTH = 0;
@@ -19,7 +20,7 @@
             <span
                 class:current={row == currentRow && playing}
                 class={evaluation[row][column] || ""}
-                >{grid[row][column]}</span
+                >{@html customUpperCase(grid[row][column])}</span
             >
         {/each}
     {/each}
