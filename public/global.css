@@ -1,10 +1,10 @@
 :root {
     --color-correct: hsl(120, 100%, 25%);
-    --color-almost: hsl(49, 98%, 46%);
-    --color-incorrect: hsl(0, 0%, 20%);
+    --color-present: hsl(49, 98%, 46%);
+    --color-absent: hsl(0, 0%, 20%);
     --color-correct-dark: hsl(120, 100%, 15%);
-    --color-almost-dark: hsl(49, 98%, 36%);
-    --color-incorrect-dark: hsl(0, 0%, 10%);
+    --color-present-dark: hsl(49, 98%, 36%);
+    --color-absent-dark: hsl(0, 0%, 10%);
     --color-backspace: hsl(0, 90%, 62%);
     --color-backspace-dark: hsl(0, 90%, 30%);
     --color-key: hsl(0, 0%, 40%);

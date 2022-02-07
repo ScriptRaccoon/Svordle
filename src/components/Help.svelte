@@ -16,8 +16,8 @@
                 {#each word.split("") as letter, i}
                     <span
                         class:correct={i == j && j == 0}
-                        class:almost={i == j && j == 1}
-                        class:incorrect={i == j + 1 && j == 2}
+                        class:present={i == j && j == 1}
+                        class:absent={i == j + 1 && j == 2}
                         >{letter}</span
                     >
                 {/each}
@@ -63,13 +63,13 @@
         border: 1px solid transparent;
     }
 
-    p > span.almost {
-        background: var(--color-almost);
+    p > span.present {
+        background: var(--color-present);
         border: 1px solid transparent;
     }
 
-    p > span.incorrect {
-        background: var(--color-incorrect);
+    p > span.absent {
+        background: var(--color-absent);
         border: 1px solid transparent;
     }
 

@@ -84,12 +84,12 @@
                 evaluation[row][index] = "correct";
                 letterEvaluation[letter] = "correct";
             } else if (correctWord.includes(letter)) {
-                evaluation[row][index] = "almost";
+                evaluation[row][index] = "present";
                 if (letterEvaluation[letter] != "correct")
-                    letterEvaluation[letter] = "almost";
+                    letterEvaluation[letter] = "present";
             } else {
-                evaluation[row][index] = "incorrect";
-                letterEvaluation[letter] = "incorrect";
+                evaluation[row][index] = "absent";
+                letterEvaluation[letter] = "absent";
             }
         }
         if (evaluation[row].every((ev) => ev == "correct")) {
@@ -142,10 +142,10 @@
                     case "correct":
                         result += "🟩";
                         break;
-                    case "almost":
+                    case "present":
                         result += "🟨";
                         break;
-                    case "incorrect":
+                    case "absent":
                         result += "⬛";
                         break;
                 }
