@@ -7,7 +7,6 @@
     import Help from "./components/Help.svelte";
     import Popup from "./components/Popup.svelte";
     import { fade } from "svelte/transition";
-    import { generateRandomWord, isValidWord } from "./words.js";
     import { copyStringToClipboard } from "./utils.js";
     import { texts } from "./language.js";
     import { allKeys } from "./keys.js";
@@ -25,7 +24,7 @@
 
     $: letters = keys.filter((key) => key.length == 1);
 
-    let correctWord,
+    let code,
         playing,
         grid,
         evaluation,
@@ -37,16 +36,27 @@
         won,
         confirm;
 
-    function initializeValues() {
-        correctWord = generateRandomWord(language);
-        if (!isProduction) console.log(correctWord);
+    async function generateCode() {
+        try {
+            const res = await fetch(`/api/word?language=${language}`);
+            if (!res.ok) throw "Word could not be loaded";
+            const { code } = await res.json();
+            return code;
+        } catch (error) {
+            console.log(error);
+            window.alert("Word could not be loaded");
+        }
+    }
+
+    async function initializeValues() {
+        code = await generateCode();
         playing = true;
         grid = new Array(ATTEMPTS)
             .fill("")
-            .map((i) => new Array(WORD_LENGTH).fill(""));
+            .map(() => new Array(WORD_LENGTH).fill(""));
         evaluation = new Array(ATTEMPTS)
             .fill(0)
-            .map((i) => new Array(WORD_LENGTH).fill(null));
+            .map(() => new Array(WORD_LENGTH).fill(null));
         row = 0;
         column = 0;
         letterEvaluation = Object.fromEntries(
@@ -54,7 +64,7 @@
         );
         popup = false;
         popupText = "";
-        won = false;
+        won = null;
         confirm = false;
     }
 
@@ -74,48 +84,58 @@
         }
     }
 
-    function evaluateWord() {
-        if (!isValidWord(grid[row].join(""), language)) {
-            showPopup(texts.notValid[language]);
-            return false;
+    async function getEvaluation() {
+        const word = grid[row].join("");
+        try {
+            const res = await fetch(
+                `/api/evaluate?language=${language}&word=${word}&code=${code}`
+            );
+            if (!res.ok) throw `Could not evaluate ${word}`;
+            const { evaluation: ev } = await res.json();
+            return ev;
+        } catch (error) {
+            console.log(error);
+            window.alert(`Could not evaluate ${word}`);
         }
-        for (let index = 0; index < WORD_LENGTH; index++) {
-            const letter = grid[row][index];
-            if (correctWord[index] == letter) {
-                evaluation[row][index] = "correct";
-                letterEvaluation[letter] = "correct";
-            } else if (correctWord.includes(letter)) {
-                evaluation[row][index] = "present";
-                if (letterEvaluation[letter] != "correct")
-                    letterEvaluation[letter] = "present";
-            } else {
-                evaluation[row][index] = "absent";
-                letterEvaluation[letter] = "absent";
-            }
-        }
-        if (evaluation[row].every((ev) => ev == "correct")) {
-            won = true;
-            showPopup(texts.won[language]);
-            endGame();
-        }
-        return true;
     }
 
-    function handleSubmit() {
+    async function handleSubmit() {
         if (column != WORD_LENGTH || !playing) return;
-        if (evaluateWord()) {
-            if (playing && row < ATTEMPTS - 1) {
-                column = 0;
-                row++;
-            } else {
-                if (!won)
-                    showPopup(
-                        `
-                        ${texts.correct[language]}<br>
-                        ${correctWord}`,
-                        5000
-                    );
+        const ev = await getEvaluation();
+        if (!ev.valid) {
+            showPopup(texts.notValid[language]);
+        } else {
+            evaluation[row] = ev.letters;
+            updateLetterEvaluation();
+            if (evaluation[row].every((x) => x == "correct")) {
+                won = true;
+                showPopup(texts.won[language]);
                 endGame();
+            } else {
+                if (row < ATTEMPTS - 1) {
+                    column = 0;
+                    row++;
+                } else {
+                    won = false;
+                    showPopup("Gameover");
+                    endGame();
+                }
+            }
+        }
+    }
+
+    function updateLetterEvaluation() {
+        for (let index = 0; index < WORD_LENGTH; index++) {
+            const letter = grid[row][index];
+            if (evaluation[row][index] == "correct") {
+                letterEvaluation[letter] = "correct";
+            } else if (
+                evaluation[row][index] == "present" &&
+                letterEvaluation[letter] != "correct"
+            ) {
+                letterEvaluation[letter] = "present";
+            } else {
+                letterEvaluation[letter] = "absent";
             }
         }
     }
