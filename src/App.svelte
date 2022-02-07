@@ -17,7 +17,8 @@
 
     let screen = "home";
 
-    const SIZE = { x: 5, y: 6 };
+    const WORD_LENGTH = 5;
+    const ATTEMPTS = 6;
 
     $: keys = allKeys[language];
 
@@ -50,12 +51,12 @@
     async function initializeValues() {
         code = await generateCode();
         playing = true;
-        grid = new Array(SIZE.y)
+        grid = new Array(ATTEMPTS)
             .fill("")
-            .map(() => new Array(SIZE.x).fill(""));
-        evaluation = new Array(SIZE.y)
+            .map(() => new Array(WORD_LENGTH).fill(""));
+        evaluation = new Array(ATTEMPTS)
             .fill(0)
-            .map(() => new Array(SIZE.x).fill(null));
+            .map(() => new Array(WORD_LENGTH).fill(null));
         row = 0;
         column = 0;
         letterEvaluation = Object.fromEntries(
@@ -74,7 +75,7 @@
         const key = e.detail;
         if (key != "Backspace") {
             grid[row][column] = key;
-            if (column < SIZE.x) column++;
+            if (column < WORD_LENGTH) column++;
         } else {
             if (column > 0) {
                 column--;
@@ -99,7 +100,7 @@
     }
 
     async function handleSubmit() {
-        if (column != SIZE.x || !playing) return;
+        if (column != WORD_LENGTH || !playing) return;
         const ev = await getEvaluation();
         if (!ev.valid) {
             showPopup(texts.notValid[language]);
@@ -111,7 +112,7 @@
                 showPopup(texts.won[language]);
                 endGame();
             } else {
-                if (row < SIZE.y - 1) {
+                if (row < ATTEMPTS - 1) {
                     column = 0;
                     row++;
                 } else {
@@ -124,7 +125,7 @@
     }
 
     function updateLetterEvaluation() {
-        for (let index = 0; index < SIZE.x; index++) {
+        for (let index = 0; index < WORD_LENGTH; index++) {
             const letter = grid[row][index];
             if (evaluation[row][index] == "correct") {
                 letterEvaluation[letter] = "correct";
@@ -155,9 +156,9 @@
         const languageSymbol = language == "de" ? "🇩🇪" : "🇬🇧";
         let result = `Wordle ${languageSymbol} `;
         result += won ? (row + 1).toString() : "X";
-        result += `/${SIZE.y}\n\n`;
+        result += `/${ATTEMPTS}\n\n`;
         for (let i = 0; i <= row; i++) {
-            for (let j = 0; j < SIZE.x; j++) {
+            for (let j = 0; j < WORD_LENGTH; j++) {
                 switch (evaluation[i][j]) {
                     case "correct":
                         result += "🟩";
@@ -197,14 +198,15 @@
         <section transition:fade={{ duration: 200 }}>
             <Header bind:screen />
             <Grid
-                {SIZE}
+                {WORD_LENGTH}
+                {ATTEMPTS}
                 {playing}
                 {grid}
                 {evaluation}
                 currentRow={row}
             />
             <menu>
-                {#if column == SIZE.x && playing}
+                {#if column == WORD_LENGTH && playing}
                     <Button
                         text={texts.submit[language]}
                         action={handleSubmit}
