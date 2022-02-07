@@ -8,3 +8,7 @@ export function copyStringToClipboard(str) {
     document.execCommand("copy");
     el.remove();
 }
+
+export function sleep(time) {
+    return new Promise((res) => setTimeout(res, time));
+}

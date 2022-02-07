@@ -12,18 +12,21 @@
         .map((x, i) => i);
     export let currentRow = 1;
     export let playing = true;
+    export let evaluationDone = [];
+    export let FLIP_SPEED = 0;
 </script>
 
 <div class="grid" style:--cols={WORD_LENGTH} style:--rows={ATTEMPTS}>
     {#each rowIndices as row}
         {#each columnIndices as column}
             <span
+                style:--speed="{FLIP_SPEED}ms"
+                class:scale={evaluationDone[row]}
                 class:current={row == currentRow && playing}
                 class={evaluation[row][column] || ""}
                 >{@html customUpperCase(grid[row][column])}</span
             >
-        {/each}
-    {/each}
+        {/each}{/each}
 </div>
 
 <style>
@@ -63,5 +66,21 @@
 
     span.current {
         border: 1px solid #eee;
+    }
+
+    span.scale {
+        animation: scale var(--speed) ease-in forwards;
+    }
+
+    @keyframes scale {
+        0% {
+            transform: scaleY(1);
+        }
+        50% {
+            transform: scaleY(0);
+        }
+        100% {
+            transform: scaleY(1);
+        }
     }
 </style>

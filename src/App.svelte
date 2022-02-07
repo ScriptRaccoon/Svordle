@@ -7,7 +7,7 @@
     import Help from "./components/Help.svelte";
     import Popup from "./components/Popup.svelte";
     import { fade } from "svelte/transition";
-    import { copyStringToClipboard } from "./utils.js";
+    import { copyStringToClipboard, sleep } from "./utils.js";
     import { texts } from "./language.js";
     import { allKeys } from "./keys.js";
 
@@ -19,6 +19,7 @@
 
     const WORD_LENGTH = 5;
     const ATTEMPTS = 6;
+    const FLIP_SPEED = 300;
 
     $: keys = allKeys[language];
 
@@ -28,6 +29,7 @@
         playing,
         grid,
         evaluation,
+        evaluationDone,
         row,
         column,
         letterEvaluation,
@@ -57,6 +59,7 @@
         evaluation = new Array(ATTEMPTS)
             .fill(0)
             .map(() => new Array(WORD_LENGTH).fill(null));
+        evaluationDone = new Array(WORD_LENGTH).fill(false);
         row = 0;
         column = 0;
         letterEvaluation = Object.fromEntries(
@@ -105,7 +108,10 @@
         if (!ev.valid) {
             showPopup(texts.notValid[language]);
         } else {
+            evaluationDone[row] = true;
+            await sleep(FLIP_SPEED / 2);
             evaluation[row] = ev.letters;
+            await sleep(FLIP_SPEED / 2);
             updateLetterEvaluation();
             if (evaluation[row].every((x) => x == "correct")) {
                 won = true;
@@ -198,11 +204,13 @@
         <section transition:fade={{ duration: 200 }}>
             <Header bind:screen />
             <Grid
+                {FLIP_SPEED}
                 {WORD_LENGTH}
                 {ATTEMPTS}
                 {playing}
                 {grid}
                 {evaluation}
+                {evaluationDone}
                 currentRow={row}
             />
             <menu>
