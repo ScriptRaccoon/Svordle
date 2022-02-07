@@ -1,18 +1,19 @@
 <script>
     export let grid = [];
     export let evaluation = [];
-    export let SIZE = {};
-    export let columnIndices = new Array(SIZE.x)
+    export let WORD_LENGTH = 0;
+    export let ATTEMPTS = 0;
+    export let columnIndices = new Array(WORD_LENGTH)
         .fill(0)
         .map((x, i) => i);
-    export let rowIndices = new Array(SIZE.y)
+    export let rowIndices = new Array(ATTEMPTS)
         .fill(0)
         .map((x, i) => i);
     export let currentRow = 1;
     export let playing = true;
 </script>
 
-<div class="grid" style:--cols={SIZE.x} style:--rows={SIZE.y}>
+<div class="grid" style:--cols={WORD_LENGTH} style:--rows={ATTEMPTS}>
     {#each rowIndices as row}
         {#each columnIndices as column}
             <span
