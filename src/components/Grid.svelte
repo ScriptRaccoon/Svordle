@@ -47,6 +47,7 @@
         justify-content: center;
         align-items: center;
         border-radius: 4px;
+        transition: border calc(0.5 * var(--speed)) linear;
     }
 
     span.correct {
