@@ -9,22 +9,18 @@
     import { fade } from "svelte/transition";
     import { copyStringToClipboard, sleep } from "./utils.js";
     import { texts } from "./language.js";
-    import { allKeys } from "./keys.js";
 
     import {
         WORD_LENGTH,
         ATTEMPTS,
         FLIP_SPEED,
         language,
+        letters,
     } from "./stores.js";
 
     language.set(navigator.language.includes("de") ? "de" : "en");
 
     let screen = "home";
-
-    $: keys = allKeys[$language];
-
-    $: letters = keys.filter((key) => key.length == 1);
 
     let code,
         playing,
@@ -66,7 +62,7 @@
         row = 0;
         column = 0;
         letterEvaluation = Object.fromEntries(
-            letters.map((letter) => [letter, null])
+            $letters.map((letter) => [letter, null])
         );
         popup = false;
         popupText = "";
@@ -233,11 +229,7 @@
                     />
                 {/if}
             </menu>
-            <Keyboard
-                {letterEvaluation}
-                {keys}
-                on:key={handleKeyInput}
-            />
+            <Keyboard {letterEvaluation} on:key={handleKeyInput} />
         </section>
     {/if}
     {#if popup}

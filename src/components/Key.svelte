@@ -2,7 +2,7 @@
     export let key = "";
     export let evaluation;
     import { FLIP_SPEED } from "../stores.js";
-    import { customUpperCase } from "../keys.js";
+    import { customUpperCase } from "../utils.js";
 
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();

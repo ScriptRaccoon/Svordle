@@ -1,7 +1,6 @@
 <script>
-    import { language } from "../stores.js";
+    import { keys, language } from "../stores.js";
     import Key from "./Key.svelte";
-    export let keys = [];
     export let letterEvaluation = {};
     $: limits = $language == "en" ? [0, 10, 19, 27] : [0, 11, 22, 31];
 </script>
@@ -9,7 +8,7 @@
 <section>
     {#each [0, 1, 2] as keyRow}
         <div class="row">
-            {#each keys.slice(limits[keyRow], limits[keyRow + 1]) as key}
+            {#each $keys.slice(limits[keyRow], limits[keyRow + 1]) as key}
                 <Key
                     on:key
                     {key}

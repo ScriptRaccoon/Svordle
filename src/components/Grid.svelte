@@ -1,6 +1,6 @@
 <script>
     import { WORD_LENGTH, ATTEMPTS, FLIP_SPEED } from "../stores.js";
-    import { customUpperCase } from "../keys.js";
+    import { customUpperCase } from "../utils.js";
     export let grid = [];
     export let evaluation = [];
     export let columnIndices = new Array($WORD_LENGTH)
