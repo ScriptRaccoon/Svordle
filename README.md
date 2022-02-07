@@ -10,7 +10,7 @@ This is a version of the [Wordle game](https://www.powerlanguage.co.uk/wordle/) 
 </div>
 <br>
  
-The backend uses Netlify's serverless functions. The correct word is never visible to the client. Notice that in the original Wordle game the correct word is visible in the browser's localStorage, which makes it possible to cheat.
+The backend uses Netlify's serverless functions. The correct word is never visible to the client (unless the guess is correct, of course). Notice that in the original Wordle game the correct word is visible in the browser's localStorage, which makes it possible to cheat.
 
 The German word list is generated from
 https://sourceforge.net/projects/germandict/files/
