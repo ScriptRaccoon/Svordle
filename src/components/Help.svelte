@@ -1,16 +1,16 @@
 <script>
+    import { language } from "../stores.js";
     import { fade } from "svelte/transition";
     export let screen = "help";
     import Button from "./Button.svelte";
-    export let language = "en";
     import { texts } from "../language.js";
 </script>
 
 <section transition:fade={{ duration: 200 }}>
-    <h2 class="center">{texts.helpTitle[language]}</h2>
-    <p>{texts.help1[language]}</p>
-    <p>{texts.help2[language]}</p>
-    {#each texts.exampleWords[language] as word, j}
+    <h2 class="center">{texts.helpTitle[$language]}</h2>
+    <p>{texts.help1[$language]}</p>
+    <p>{texts.help2[$language]}</p>
+    {#each texts.exampleWords[$language] as word, j}
         <div>
             <p class="center">
                 {#each word.split("") as letter, i}
@@ -22,10 +22,10 @@
                     >
                 {/each}
             </p>
-            <p>{texts[`help${j + 3}`][language]}</p>
+            <p>{texts[`help${j + 3}`][$language]}</p>
         </div>
     {/each}
-    <p>{texts.help6[language]}</p>
+    <p>{texts.help6[$language]}</p>
     <p class="center">
         <Button text="Start" action={() => (screen = "game")} />
     </p>

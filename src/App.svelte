@@ -11,17 +11,18 @@
     import { texts } from "./language.js";
     import { allKeys } from "./keys.js";
 
-    export let language = navigator.language.includes("de")
-        ? "de"
-        : "en";
+    import {
+        WORD_LENGTH,
+        ATTEMPTS,
+        FLIP_SPEED,
+        language,
+    } from "./stores.js";
+
+    language.set(navigator.language.includes("de") ? "de" : "en");
 
     let screen = "home";
 
-    const WORD_LENGTH = 5;
-    const ATTEMPTS = 6;
-    const FLIP_SPEED = 300;
-
-    $: keys = allKeys[language];
+    $: keys = allKeys[$language];
 
     $: letters = keys.filter((key) => key.length == 1);
 
@@ -40,7 +41,9 @@
 
     async function generateCode() {
         try {
-            const res = await fetch(`/api/word?language=${language}`);
+            const res = await fetch(
+                `/api/word?language=${$language}`
+            );
             if (!res.ok) throw "Word could not be loaded";
             const { code } = await res.json();
             return code;
@@ -53,13 +56,13 @@
     async function initializeValues() {
         code = await generateCode();
         playing = true;
-        grid = new Array(ATTEMPTS)
+        grid = new Array($ATTEMPTS)
             .fill("")
-            .map(() => new Array(WORD_LENGTH).fill(""));
-        evaluation = new Array(ATTEMPTS)
+            .map(() => new Array($WORD_LENGTH).fill(""));
+        evaluation = new Array($ATTEMPTS)
             .fill(0)
-            .map(() => new Array(WORD_LENGTH).fill(null));
-        evaluationDone = new Array(WORD_LENGTH).fill(false);
+            .map(() => new Array($WORD_LENGTH).fill(null));
+        evaluationDone = new Array($WORD_LENGTH).fill(false);
         row = 0;
         column = 0;
         letterEvaluation = Object.fromEntries(
@@ -71,14 +74,14 @@
         confirm = false;
     }
 
-    $: if (language) initializeValues();
+    $: if ($language) initializeValues();
 
     function handleKeyInput(e) {
         if (!playing) return;
         const key = e.detail;
         if (key != "Backspace") {
             grid[row][column] = key;
-            if (column < WORD_LENGTH) column++;
+            if (column < $WORD_LENGTH) column++;
         } else {
             if (column > 0) {
                 column--;
@@ -91,7 +94,7 @@
         const word = grid[row].join("");
         try {
             const res = await fetch(
-                `/api/evaluate?language=${language}&word=${word}&code=${code}`
+                `/api/evaluate?language=${$language}&word=${word}&code=${code}`
             );
             if (!res.ok) throw `Could not evaluate ${word}`;
             const { evaluation: ev } = await res.json();
@@ -103,22 +106,22 @@
     }
 
     async function handleSubmit() {
-        if (column != WORD_LENGTH || !playing) return;
+        if (column != $WORD_LENGTH || !playing) return;
         const ev = await getEvaluation();
         if (!ev.valid) {
-            showPopup(texts.notValid[language]);
+            showPopup(texts.notValid[$language]);
         } else {
             evaluationDone[row] = true;
-            await sleep(FLIP_SPEED / 2);
+            await sleep($FLIP_SPEED / 2);
             evaluation[row] = ev.letters;
-            await sleep(FLIP_SPEED / 2);
+            await sleep($FLIP_SPEED / 2);
             updateLetterEvaluation();
             if (evaluation[row].every((x) => x == "correct")) {
                 won = true;
-                showPopup(texts.won[language]);
+                showPopup(texts.won[$language]);
                 endGame();
             } else {
-                if (row < ATTEMPTS - 1) {
+                if (row < $ATTEMPTS - 1) {
                     column = 0;
                     row++;
                 } else {
@@ -131,7 +134,7 @@
     }
 
     function updateLetterEvaluation() {
-        for (let index = 0; index < WORD_LENGTH; index++) {
+        for (let index = 0; index < $WORD_LENGTH; index++) {
             const letter = grid[row][index];
             if (evaluation[row][index] == "correct") {
                 letterEvaluation[letter] = "correct";
@@ -159,12 +162,12 @@
     }
 
     function shareResult() {
-        const languageSymbol = language == "de" ? "🇩🇪" : "🇬🇧";
+        const languageSymbol = $language == "de" ? "🇩🇪" : "🇬🇧";
         let result = `Wordle ${languageSymbol} `;
         result += won ? (row + 1).toString() : "X";
-        result += `/${ATTEMPTS}\n\n`;
+        result += `/${$ATTEMPTS}\n\n`;
         for (let i = 0; i <= row; i++) {
-            for (let j = 0; j < WORD_LENGTH; j++) {
+            for (let j = 0; j < $WORD_LENGTH; j++) {
                 switch (evaluation[i][j]) {
                     case "correct":
                         result += "🟩";
@@ -180,7 +183,7 @@
             result += "\n";
         }
         copyStringToClipboard(result);
-        showPopup(texts.clipboard[language]);
+        showPopup(texts.clipboard[$language]);
     }
 
     function handleRestart() {
@@ -197,16 +200,13 @@
 
 <main>
     {#if screen == "home"}
-        <Home bind:language bind:screen />
+        <Home bind:screen />
     {:else if screen == "help"}
-        <Help {language} bind:screen />
+        <Help bind:screen />
     {:else if screen == "game"}
         <section transition:fade={{ duration: 200 }}>
             <Header bind:screen />
             <Grid
-                {FLIP_SPEED}
-                {WORD_LENGTH}
-                {ATTEMPTS}
                 {playing}
                 {grid}
                 {evaluation}
@@ -214,27 +214,26 @@
                 currentRow={row}
             />
             <menu>
-                {#if column == WORD_LENGTH && playing}
+                {#if column == $WORD_LENGTH && playing}
                     <Button
-                        text={texts.submit[language]}
+                        text={texts.submit[$language]}
                         action={handleSubmit}
                     />
                 {/if}
                 <Button
                     text={confirm
-                        ? texts.confirm[language]
-                        : texts.restart[language]}
+                        ? texts.confirm[$language]
+                        : texts.restart[$language]}
                     action={handleRestart}
                 />
                 {#if !playing}
                     <Button
-                        text={texts.share[language]}
+                        text={texts.share[$language]}
                         action={shareResult}
                     />
                 {/if}
             </menu>
             <Keyboard
-                {language}
                 {letterEvaluation}
                 {keys}
                 on:key={handleKeyInput}

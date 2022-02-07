@@ -1,9 +1,9 @@
 <script>
+    import { language } from "../stores.js";
     import Key from "./Key.svelte";
     export let keys = [];
     export let letterEvaluation = {};
-    export let language = "en";
-    $: limits = language == "en" ? [0, 10, 19, 27] : [0, 11, 22, 31];
+    $: limits = $language == "en" ? [0, 10, 19, 27] : [0, 11, 22, 31];
 </script>
 
 <section>

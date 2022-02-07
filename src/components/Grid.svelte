@@ -1,26 +1,28 @@
 <script>
+    import { WORD_LENGTH, ATTEMPTS, FLIP_SPEED } from "../stores.js";
     import { customUpperCase } from "../keys.js";
     export let grid = [];
     export let evaluation = [];
-    export let WORD_LENGTH = 0;
-    export let ATTEMPTS = 0;
-    export let columnIndices = new Array(WORD_LENGTH)
+    export let columnIndices = new Array($WORD_LENGTH)
         .fill(0)
-        .map((x, i) => i);
-    export let rowIndices = new Array(ATTEMPTS)
+        .map((_, i) => i);
+    export let rowIndices = new Array($ATTEMPTS)
         .fill(0)
-        .map((x, i) => i);
+        .map((_, i) => i);
     export let currentRow = 1;
     export let playing = true;
     export let evaluationDone = [];
-    export let FLIP_SPEED = 0;
 </script>
 
-<div class="grid" style:--cols={WORD_LENGTH} style:--rows={ATTEMPTS}>
+<div
+    class="grid"
+    style:--cols={$WORD_LENGTH}
+    style:--rows={$ATTEMPTS}
+>
     {#each rowIndices as row}
         {#each columnIndices as column}
             <span
-                style:--speed="{FLIP_SPEED}ms"
+                style:--speed="{$FLIP_SPEED}ms"
                 class:scale={evaluationDone[row]}
                 class:current={row == currentRow && playing}
                 class={evaluation[row][column] || ""}

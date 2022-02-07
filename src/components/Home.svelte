@@ -1,20 +1,21 @@
 <script>
+    import { language } from "../stores.js";
     import { fade } from "svelte/transition";
     export let screen = "home";
     import Button from "./Button.svelte";
-    export let language = "en";
+
     import { texts } from "../language.js";
 </script>
 
 <section transition:fade={{ duration: 200 }}>
     <h1>Wordle</h1>
-    <p>{texts.subtitle[language]}</p>
+    <p>{texts.subtitle[$language]}</p>
     <menu>
         {#each ["en", "de"] as lan}
             <button
                 title={texts.languageTerm[lan]}
-                class:active={language == lan}
-                on:click={() => (language = lan)}
+                class:active={$language == lan}
+                on:click={() => ($language = lan)}
             >
                 <img src="./img/flag-{lan}.png" alt="flag" />
             </button>
