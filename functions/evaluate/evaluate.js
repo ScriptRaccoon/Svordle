@@ -29,8 +29,8 @@ const handler = async (event) => {
                         letter == correctWord[i]
                             ? "correct"
                             : correctWord.includes(letter)
-                            ? "almost"
-                            : "incorrect";
+                            ? "present"
+                            : "absent";
                 }
             }
         }

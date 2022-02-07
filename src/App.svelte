@@ -129,12 +129,12 @@
             if (evaluation[row][index] == "correct") {
                 letterEvaluation[letter] = "correct";
             } else if (
-                evaluation[row][index] == "almost" &&
+                evaluation[row][index] == "present" &&
                 letterEvaluation[letter] != "correct"
             ) {
-                letterEvaluation[letter] = "almost";
+                letterEvaluation[letter] = "present";
             } else {
-                letterEvaluation[letter] = "incorrect";
+                letterEvaluation[letter] = "absent";
             }
         }
     }
@@ -162,10 +162,10 @@
                     case "correct":
                         result += "🟩";
                         break;
-                    case "almost":
+                    case "present":
                         result += "🟨";
                         break;
-                    case "incorrect":
+                    case "absent":
                         result += "⬛";
                         break;
                 }

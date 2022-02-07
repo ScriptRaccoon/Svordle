@@ -49,13 +49,13 @@
         border: 1px solid transparent;
     }
 
-    span.almost {
-        background: var(--color-almost);
+    span.present {
+        background: var(--color-present);
         border: 1px solid transparent;
     }
 
-    span.incorrect {
-        background: var(--color-incorrect);
+    span.absent {
+        background: var(--color-absent);
         border: 1px solid transparent;
     }
 

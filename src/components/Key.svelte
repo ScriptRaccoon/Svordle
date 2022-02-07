@@ -60,16 +60,16 @@
             var(--color-correct-dark);
     }
 
-    button.almost {
-        background: var(--color-almost);
+    button.present {
+        background: var(--color-present);
         box-shadow: 0px var(--shadow-size) 0px
-            var(--color-almost-dark);
+            var(--color-present-dark);
     }
 
-    button.incorrect {
-        background: var(--color-incorrect);
+    button.absent {
+        background: var(--color-absent);
         box-shadow: 0px var(--shadow-size) 0px
-            var(--color-incorrect-dark);
+            var(--color-absent-dark);
     }
 
     button.pressed {
