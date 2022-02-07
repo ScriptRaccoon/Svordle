@@ -4,8 +4,9 @@ https://wordle-svelte.netlify.app
 
 This is a version of the [Wordle game](https://www.powerlanguage.co.uk/wordle/) made with Svelte. You can choose between English and German.
 
-<div style="display:flex;gap:30px;">
+<div>
 <img src="./public/img/screenshot-en.png" alt="screenshot english version" width="300px">
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="./public/img/screenshot-de.png" alt="screenshot german version" width="300px">
 </div>
 <br>
