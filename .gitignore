@@ -1,10 +1,7 @@
 /node_modules/
 /public/build/
-
-.DS_Store
 todo.txt
 notes.txt
 data/german.txt
 data/output.js
-# Local Netlify folder
 .netlify

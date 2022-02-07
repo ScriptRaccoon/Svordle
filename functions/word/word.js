@@ -13,6 +13,7 @@ const handler = async (event) => {
             throw "Invalid language";
         const correctWord = randomElement(words[language]);
         const code = encrypt(correctWord);
+        console.log({ correctWord });
         return {
             statusCode: 200,
             body: JSON.stringify({ code }),
