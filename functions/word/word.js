@@ -12,7 +12,6 @@ const handler = async (event) => {
         if (!["de", "en"].includes(language))
             throw "Invalid language";
         const correctWord = randomElement(words[language]);
-        console.log({ correctWord });
         const code = encrypt(correctWord);
         return {
             statusCode: 200,

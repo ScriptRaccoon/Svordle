@@ -15,7 +15,6 @@ const handler = async (event) => {
         const code = event.queryStringParameters.code;
         if (!code) throw "No code provided";
         const correctWord = decrypt(code);
-        console.log({ word, correctWord });
         const evaluation = { valid: false, letters: [] };
         if (word == correctWord) {
             evaluation.valid = true;
@@ -34,7 +33,6 @@ const handler = async (event) => {
                 }
             }
         }
-        console.log({ evaluation });
         return {
             statusCode: 200,
             body: JSON.stringify({ evaluation }),
