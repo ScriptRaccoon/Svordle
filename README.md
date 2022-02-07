@@ -1,8 +1,8 @@
-# Wordle made with Svelte (Serverless version)
+# Wordle made with Svelte
 
-https://wordle-svelte-serverless.netlify.app
+https://wordle-svelte.netlify.app
 
-This is a version of [Wordle](https://www.powerlanguage.co.uk/wordle/) made with Svelte. You can choose between English and German.
+This is a version of the [Wordle game](https://www.powerlanguage.co.uk/wordle/) made with Svelte. You can choose between English and German.
 
 <div style="display:flex;gap:20px">
 <img src="./public/img/screenshot.png" height="300px">
@@ -10,7 +10,7 @@ This is a version of [Wordle](https://www.powerlanguage.co.uk/wordle/) made with
 </div>
 <br>
  
-The backend uses Netlify's serverless functions. The correct word is never visible to the client. Notice that in the [Original Wordle](https://www.powerlanguage.co.uk/wordle/) the correct word is visible in the browser's localStorage, which makes it possible to cheat.
+The backend uses Netlify's serverless functions. The correct word is never visible to the client. Notice that in the original Wordle game the correct word is visible in the browser's localStorage, which makes it possible to cheat.
 
 The German word list is generated from
 https://sourceforge.net/projects/germandict/files/
