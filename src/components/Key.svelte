@@ -43,6 +43,7 @@
         font-size: min(30px, 6vw);
         background: var(--color-key);
         box-shadow: 0px var(--shadow-size) 0px var(--color-key-dark);
+        transition: background 300ms linear;
     }
 
     button.backspace {
