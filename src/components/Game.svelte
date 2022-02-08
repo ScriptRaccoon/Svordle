@@ -1,12 +1,11 @@
 <script>
-    import { fade } from "svelte/transition";
     import Header from "./Header.svelte";
     import Grid from "./Grid.svelte";
     import Button from "./Button.svelte";
     import Keyboard from "./Keyboard.svelte";
     import Popup from "./Popup.svelte";
     import { texts } from "../language.js";
-    import { getEvaluation } from "../api.js";
+    import { getEvaluation, getCode } from "../api.js";
     import { sleep } from "../utils.js";
     import {
         WORD_LENGTH,
@@ -14,21 +13,44 @@
         ATTEMPTS,
         FLIP_DELAY,
         FLIP_SPEED,
+        letters,
     } from "../stores.js";
 
-    export let screen;
-    export let grid;
-    export let code;
-    export let won;
-    export let confirm;
-    export let playing;
-    export let evaluation;
-    export let evaluationDone;
-    export let letterEvaluation;
-    export let row;
-    export let column;
-    export let popup;
-    export let popupText;
+    let code = "",
+        playing,
+        grid,
+        evaluation,
+        evaluationDone,
+        row,
+        column,
+        letterEvaluation,
+        popup,
+        popupText,
+        won,
+        confirm;
+
+    async function initializeValues() {
+        playing = true;
+        grid = new Array($ATTEMPTS)
+            .fill("")
+            .map(() => new Array($WORD_LENGTH).fill(""));
+        evaluation = new Array($ATTEMPTS)
+            .fill(0)
+            .map(() => new Array($WORD_LENGTH).fill(null));
+        evaluationDone = new Array($WORD_LENGTH).fill(false);
+        row = 0;
+        column = 0;
+        letterEvaluation = Object.fromEntries(
+            $letters.map((letter) => [letter, null])
+        );
+        popup = false;
+        popupText = "";
+        won = null;
+        confirm = false;
+        code = await getCode($language);
+    }
+
+    $: if ($language) initializeValues();
 
     async function handleSubmit() {
         if (column != $WORD_LENGTH || !playing) return;
@@ -88,8 +110,7 @@
 
     function handleRestart() {
         if (!playing || confirm) {
-            window.alert("Need to change that code here");
-            // initializeValues();
+            initializeValues();
         } else {
             confirm = true;
             setTimeout(() => {
@@ -133,39 +154,37 @@
     }
 </script>
 
-<section transition:fade={{ duration: 200 }}>
-    <Header bind:screen />
-    {#if grid.length == $ATTEMPTS}
-        <Grid
-            {playing}
-            {grid}
-            {evaluation}
-            {evaluationDone}
-            currentRow={row}
+<Header />
+
+{#if grid.length == $ATTEMPTS}
+    <Grid
+        {playing}
+        {grid}
+        {evaluation}
+        {evaluationDone}
+        currentRow={row}
+    />
+{/if}
+
+<menu>
+    {#if column == $WORD_LENGTH && playing}
+        <Button
+            text={texts.submit[$language]}
+            action={handleSubmit}
         />
     {/if}
-    <menu>
-        {#if column == $WORD_LENGTH && playing}
-            <Button
-                text={texts.submit[$language]}
-                action={handleSubmit}
-            />
-        {/if}
-        <Button
-            text={confirm
-                ? texts.confirm[$language]
-                : texts.restart[$language]}
-            action={handleRestart}
-        />
-        {#if !playing}
-            <Button
-                text={texts.share[$language]}
-                action={shareResult}
-            />
-        {/if}
-    </menu>
-    <Keyboard {letterEvaluation} on:key={handleKeyInput} />
-</section>
+    <Button
+        text={confirm
+            ? texts.confirm[$language]
+            : texts.restart[$language]}
+        action={handleRestart}
+    />
+    {#if !playing}
+        <Button text={texts.share[$language]} action={shareResult} />
+    {/if}
+</menu>
+
+<Keyboard {letterEvaluation} on:key={handleKeyInput} />
 
 {#if popup}
     <Popup bind:popup {popupText} />

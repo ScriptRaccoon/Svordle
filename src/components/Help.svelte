@@ -1,12 +1,10 @@
 <script>
-    import { language } from "../stores.js";
-    import { fade } from "svelte/transition";
-    export let screen = "help";
+    import { language, screen } from "../stores.js";
     import Button from "./Button.svelte";
     import { texts } from "../language.js";
 </script>
 
-<section transition:fade={{ duration: 200 }}>
+<div class="container">
     <h2 class="center">{texts.helpTitle[$language]}</h2>
     <p>{texts.help1[$language]}</p>
     <p>{texts.help2[$language]}</p>
@@ -27,18 +25,16 @@
     {/each}
     <p>{texts.help6[$language]}</p>
     <p class="center">
-        <Button text="Start" action={() => (screen = "game")} />
+        <Button text="Start" action={() => ($screen = "game")} />
     </p>
-</section>
+</div>
 
 <style>
-    section {
-        position: absolute;
-        inset: 0;
+    .container {
         font-size: 18px;
         padding: 10px;
-        z-index: 5;
     }
+
     h2 {
         padding: 15px 0px;
     }
