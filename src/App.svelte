@@ -2,17 +2,17 @@
     import Home from "./views/Home.svelte";
     import Help from "./views/Help.svelte";
     import Game from "./views/Game.svelte";
-    import { screen } from "./stores.js";
+    import { view } from "./stores.js";
 </script>
 
 <main>
-    <section class:visible={$screen == "home"} class="view">
+    <section class:visible={$view == "home"} class="view">
         <Home />
     </section>
-    <section class:visible={$screen == "game"} class="view">
+    <section class:visible={$view == "game"} class="view">
         <Game />
     </section>
-    <section class:visible={$screen == "help"} class="view">
+    <section class:visible={$view == "help"} class="view">
         <Help />
     </section>
 </main>

@@ -1,5 +1,5 @@
 <script>
-    import { language, screen } from "../stores.js";
+    import { language, view } from "../stores.js";
     import Button from "../components/Button.svelte";
     import { texts } from "../language.js";
 </script>
@@ -25,7 +25,7 @@
     {/each}
     <p>{texts.help6[$language]}</p>
     <p class="center">
-        <Button text="Start" action={() => ($screen = "game")} />
+        <Button text="Start" action={() => ($view = "game")} />
     </p>
 </div>
 

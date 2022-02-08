@@ -1,5 +1,5 @@
 <script>
-    import { language, screen } from "../stores.js";
+    import { language, view } from "../stores.js";
     import Button from "../components/Button.svelte";
     import { texts } from "../language.js";
 </script>
@@ -19,7 +19,7 @@
         {/each}
     </menu>
     <p>
-        <Button text="Start" action={() => ($screen = "game")} />
+        <Button text="Start" action={() => ($view = "game")} />
     </p>
     <aside>
         <a

@@ -1,12 +1,12 @@
 <script>
-    import { screen } from "../stores.js";
+    import { view } from "../stores.js";
 </script>
 
 <header>
-    <button on:click={() => ($screen = "help")}>
+    <button on:click={() => ($view = "help")}>
         <i class="far fa-question-circle" />
     </button>
-    <button on:click={() => ($screen = "home")}>
+    <button on:click={() => ($view = "home")}>
         <i class="fas fa-home" />
     </button>
 </header>

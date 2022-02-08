@@ -5,7 +5,7 @@ export const ATTEMPTS = readable(6);
 export const FLIP_SPEED = readable(300);
 export const FLIP_DELAY = readable(80);
 
-export const screen = writable("home");
+export const view = writable("home");
 
 export const language = writable(
     navigator.language.includes("de") ? "de" : "en"
