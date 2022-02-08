@@ -9,6 +9,7 @@
     import { fade } from "svelte/transition";
     import { sleep } from "./utils.js";
     import { texts } from "./language.js";
+    import { getEvaluation, getCode } from "./api.js";
 
     import {
         WORD_LENGTH,
@@ -36,22 +37,8 @@
         won,
         confirm;
 
-    async function generateCode() {
-        try {
-            const res = await fetch(
-                `/api/word?language=${$language}`
-            );
-            if (!res.ok) throw "Word could not be loaded";
-            const { code } = await res.json();
-            return code;
-        } catch (error) {
-            console.log(error);
-            window.alert("Word could not be loaded");
-        }
-    }
-
     async function initializeValues() {
-        code = await generateCode();
+        code = await getCode($language);
         playing = true;
         grid = new Array($ATTEMPTS)
             .fill("")
@@ -87,24 +74,10 @@
         }
     }
 
-    async function getEvaluation() {
-        const word = grid[row].join("");
-        try {
-            const res = await fetch(
-                `/api/evaluate?language=${$language}&word=${word}&code=${code}`
-            );
-            if (!res.ok) throw `Could not evaluate ${word}`;
-            const { evaluation: ev } = await res.json();
-            return ev;
-        } catch (error) {
-            console.log(error);
-            window.alert(`Could not evaluate ${word}`);
-        }
-    }
-
     async function handleSubmit() {
         if (column != $WORD_LENGTH || !playing) return;
-        const ev = await getEvaluation();
+        const word = grid[row].join("");
+        const ev = await getEvaluation($language, word, code);
         if (!ev.valid) {
             showPopup(texts.notValid[$language]);
         } else {
