@@ -3,6 +3,7 @@ import { readable, writable, derived } from "svelte/store";
 export const WORD_LENGTH = readable(5);
 export const ATTEMPTS = readable(6);
 export const FLIP_SPEED = readable(300);
+export const FLIP_DELAY = readable(80);
 
 export const language = writable("en");
 

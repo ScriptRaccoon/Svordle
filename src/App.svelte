@@ -14,6 +14,7 @@
         WORD_LENGTH,
         ATTEMPTS,
         FLIP_SPEED,
+        FLIP_DELAY,
         language,
         letters,
     } from "./stores.js";
@@ -108,10 +109,11 @@
             showPopup(texts.notValid[$language]);
         } else {
             evaluationDone[row] = true;
-            await sleep($FLIP_SPEED / 2);
             evaluation[row] = ev.letters;
-            await sleep($FLIP_SPEED / 2);
             updateLetterEvaluation();
+            await sleep(
+                $FLIP_SPEED + ($WORD_LENGTH - 1) * $FLIP_DELAY
+            );
             if (evaluation[row].every((x) => x == "correct")) {
                 won = true;
                 showPopup(texts.won[$language]);

@@ -1,7 +1,11 @@
 <script>
     export let key = "";
     export let evaluation;
-    import { FLIP_SPEED } from "../stores.js";
+    import {
+        FLIP_SPEED,
+        FLIP_DELAY,
+        WORD_LENGTH,
+    } from "../stores.js";
     import { customUpperCase } from "../utils.js";
 
     import { createEventDispatcher } from "svelte";
@@ -19,7 +23,7 @@
 </script>
 
 <button
-    style:--speed="{$FLIP_SPEED}ms"
+    style:--speed="{$FLIP_SPEED + ($WORD_LENGTH - 1) * $FLIP_DELAY}ms"
     class:backspace={key == "Backspace"}
     class:pressed
     class={evaluation}
@@ -44,7 +48,8 @@
         font-size: min(30px, 6vw);
         background: var(--color-key);
         box-shadow: 0px var(--shadow-size) 0px var(--color-key-dark);
-        transition: background var(--speed) linear;
+        transition: background var(--speed) linear,
+            box-shadow var(--speed) linear;
     }
 
     button.backspace {

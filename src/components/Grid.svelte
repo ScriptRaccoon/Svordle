@@ -1,5 +1,10 @@
 <script>
-    import { WORD_LENGTH, ATTEMPTS, FLIP_SPEED } from "../stores.js";
+    import {
+        WORD_LENGTH,
+        ATTEMPTS,
+        FLIP_SPEED,
+        FLIP_DELAY,
+    } from "../stores.js";
     import { customUpperCase } from "../utils.js";
     export let grid = [];
     export let evaluation = [];
@@ -22,13 +27,17 @@
     {#each rowIndices as row}
         {#each columnIndices as column}
             <span
+                style:animation-delay="{column * $FLIP_DELAY}ms"
                 style:--speed="{$FLIP_SPEED}ms"
-                class:scale={evaluationDone[row]}
+                class={evaluation[row][column]
+                    ? evaluation[row][column]
+                    : ""}
+                class:flip={evaluationDone[row]}
                 class:current={row == currentRow && playing}
-                class={evaluation[row][column] || ""}
                 >{@html customUpperCase(grid[row][column])}</span
             >
-        {/each}{/each}
+        {/each}
+    {/each}
 </div>
 
 <style>
@@ -49,41 +58,42 @@
         justify-content: center;
         align-items: center;
         border-radius: 4px;
-        transition: border calc(0.5 * var(--speed)) linear;
+        transition: border 1500ms linear;
     }
 
     span.correct {
-        background: var(--color-correct);
-        border: 1px solid transparent;
+        --evaluation-color: var(--color-correct);
     }
 
     span.present {
-        background: var(--color-present);
-        border: 1px solid transparent;
+        --evaluation-color: var(--color-present);
     }
 
     span.absent {
-        background: var(--color-absent);
-        border: 1px solid transparent;
+        --evaluation-color: var(--color-absent);
     }
 
     span.current {
         border: 1px solid #eee;
     }
 
-    span.scale {
-        animation: scale var(--speed) ease-in forwards;
+    span.flip {
+        animation: flip var(--speed) ease-in forwards;
     }
 
-    @keyframes scale {
+    @keyframes flip {
         0% {
             transform: scaleY(1);
         }
         50% {
             transform: scaleY(0);
+            border: 1px solid transparent;
+            background: transparent;
         }
         100% {
             transform: scaleY(1);
+            border: 1px solid transparent;
+            background: var(--evaluation-color);
         }
     }
 </style>
