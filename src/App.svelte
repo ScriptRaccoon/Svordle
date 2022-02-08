@@ -1,7 +1,7 @@
 <script>
-    import Home from "./components/Home.svelte";
-    import Help from "./components/Help.svelte";
-    import Game from "./components/Game.svelte";
+    import Home from "./views/Home.svelte";
+    import Help from "./views/Help.svelte";
+    import Game from "./views/Game.svelte";
     import { screen } from "./stores.js";
 </script>
 

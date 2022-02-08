@@ -1,9 +1,9 @@
 <script>
-    import Header from "./Header.svelte";
-    import Grid from "./Grid.svelte";
-    import Button from "./Button.svelte";
-    import Keyboard from "./Keyboard.svelte";
-    import Popup from "./Popup.svelte";
+    import Header from "../components/Header.svelte";
+    import Grid from "../components/Grid.svelte";
+    import Button from "../components/Button.svelte";
+    import Keyboard from "../components/Keyboard.svelte";
+    import Popup from "../components/Popup.svelte";
     import { texts } from "../language.js";
     import { getEvaluation, getCode } from "../api.js";
     import { sleep } from "../utils.js";

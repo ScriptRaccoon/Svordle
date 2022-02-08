@@ -1,6 +1,6 @@
 <script>
     import { language, screen } from "../stores.js";
-    import Button from "./Button.svelte";
+    import Button from "../components/Button.svelte";
     import { texts } from "../language.js";
 </script>
 
