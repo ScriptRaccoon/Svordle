@@ -3,18 +3,19 @@
     import Help from "./views/Help.svelte";
     import Game from "./views/Game.svelte";
     import { view } from "./stores.js";
+    const views = [
+        { name: "home", component: Home },
+        { name: "help", component: Help },
+        { name: "game", component: Game },
+    ];
 </script>
 
 <main>
-    <section class:visible={$view == "home"} class="view">
-        <Home />
-    </section>
-    <section class:visible={$view == "game"} class="view">
-        <Game />
-    </section>
-    <section class:visible={$view == "help"} class="view">
-        <Help />
-    </section>
+    {#each views as { name, component }}
+        <section class:visible={$view == name} class="view">
+            <svelte:component this={component} />
+        </section>
+    {/each}
 </main>
 
 <style>
