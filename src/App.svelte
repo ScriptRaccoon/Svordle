@@ -7,7 +7,7 @@
     import Help from "./components/Help.svelte";
     import Popup from "./components/Popup.svelte";
     import { fade } from "svelte/transition";
-    import { copyStringToClipboard, sleep } from "./utils.js";
+    import { sleep } from "./utils.js";
     import { texts } from "./language.js";
 
     import {
@@ -151,7 +151,7 @@
         }, duration);
     }
 
-    function shareResult() {
+    async function shareResult() {
         const languageSymbol = $language == "de" ? "🇩🇪" : "🇬🇧";
         let result = `Wordle ${languageSymbol} `;
         result += won ? (row + 1).toString() : "X";
@@ -173,7 +173,7 @@
             result += "\n";
         }
         result += "\n" + `https://wordle-svelte.netlify.app`;
-        copyStringToClipboard(result);
+        await navigator.clipboard.writeText(result);
         showPopup(texts.clipboard[$language]);
     }
 
