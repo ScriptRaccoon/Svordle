@@ -6,52 +6,29 @@
     import Keyboard from "./Keyboard.svelte";
     import Popup from "./Popup.svelte";
     import { texts } from "../language.js";
-    import { getEvaluation, getCode } from "../api.js";
+    import { getEvaluation } from "../api.js";
+    import { sleep } from "../utils.js";
     import {
         WORD_LENGTH,
         language,
         ATTEMPTS,
         FLIP_DELAY,
         FLIP_SPEED,
-        letters,
     } from "../stores.js";
 
     export let screen;
-    let grid;
-    let code;
-    let won;
-    let confirm;
-    let playing;
-    let evaluation;
-    let evaluationDone;
-    let letterEvaluation;
-    let row;
-    let column;
-    let popup;
-    let popupText;
-
-    async function initializeValues() {
-        code = await getCode($language);
-        playing = true;
-        grid = new Array($ATTEMPTS)
-            .fill("")
-            .map(() => new Array($WORD_LENGTH).fill(""));
-        evaluation = new Array($ATTEMPTS)
-            .fill(0)
-            .map(() => new Array($WORD_LENGTH).fill(null));
-        evaluationDone = new Array($WORD_LENGTH).fill(false);
-        row = 0;
-        column = 0;
-        letterEvaluation = Object.fromEntries(
-            $letters.map((letter) => [letter, null])
-        );
-        popup = false;
-        popupText = "";
-        won = null;
-        confirm = false;
-    }
-
-    $: if ($language) initializeValues();
+    export let grid;
+    export let code;
+    export let won;
+    export let confirm;
+    export let playing;
+    export let evaluation;
+    export let evaluationDone;
+    export let letterEvaluation;
+    export let row;
+    export let column;
+    export let popup;
+    export let popupText;
 
     async function handleSubmit() {
         if (column != $WORD_LENGTH || !playing) return;
@@ -111,7 +88,8 @@
 
     function handleRestart() {
         if (!playing || confirm) {
-            initializeValues();
+            window.alert("Need to change that code here");
+            // initializeValues();
         } else {
             confirm = true;
             setTimeout(() => {
@@ -157,7 +135,7 @@
 
 <section transition:fade={{ duration: 200 }}>
     <Header bind:screen />
-    {#if grid}
+    {#if grid.length == $ATTEMPTS}
         <Grid
             {playing}
             {grid}
