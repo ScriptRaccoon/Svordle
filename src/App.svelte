@@ -172,6 +172,7 @@
             }
             result += "\n";
         }
+        result += "\n" + `https://wordle-svelte.netlify.app`;
         copyStringToClipboard(result);
         showPopup(texts.clipboard[$language]);
     }
