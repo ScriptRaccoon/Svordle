@@ -22,7 +22,6 @@
     main {
         max-width: 500px;
         margin: 0 auto;
-        padding: 10px;
         min-height: 100vh;
         position: relative;
     }
@@ -32,6 +31,7 @@
         opacity: 0;
         pointer-events: none;
         transition: opacity 200ms linear;
+        padding: 10px;
     }
     .view.visible {
         opacity: 1;

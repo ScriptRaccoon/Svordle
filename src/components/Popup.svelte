@@ -21,6 +21,7 @@
         font-size: 22px;
         line-height: 1.5;
         font-weight: bold;
+        text-align: center;
         padding: 10px 20px;
         background: #eee;
         color: #111;
