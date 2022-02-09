@@ -5,7 +5,7 @@
 </script>
 
 <div class="container">
-    <h1>Wordle</h1>
+    <h1>Svordle</h1>
     <p>{texts.subtitle[$language]}</p>
     <menu>
         {#each ["en", "de"] as lan}

@@ -148,7 +148,7 @@
     async function shareResult() {
         if (playing) return;
         const languageSymbol = $language == "de" ? "🇩🇪" : "🇬🇧";
-        let result = `Wordle ${languageSymbol} `;
+        let result = `Svordle ${languageSymbol} `;
         result += won ? (row + 1).toString() : "X";
         result += `/${$ATTEMPTS}\n\n`;
         for (let i = 0; i <= row; i++) {
@@ -167,7 +167,7 @@
             }
             result += "\n";
         }
-        result += "\n" + `https://wordle-svelte.netlify.app`;
+        result += "\n" + `https://svordle.netlify.app`;
         await navigator.clipboard.writeText(result);
         showPopup(texts.clipboard[$language]);
     }

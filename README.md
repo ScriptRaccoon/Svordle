@@ -1,6 +1,6 @@
-# Wordle made with Svelte
+# Svordle
 
-https://wordle-svelte.netlify.app
+https://svordle.netlify.app
 
 This is a version of the [Wordle game](https://www.powerlanguage.co.uk/wordle/) made with Svelte. You can choose between English and German.
 
