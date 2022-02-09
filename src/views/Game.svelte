@@ -123,7 +123,7 @@
         playing = false;
     }
 
-    function showPopup(text, duration = 1500) {
+    function showPopup(text, duration = 3000) {
         popupText = text;
         popup = true;
         setTimeout(() => {

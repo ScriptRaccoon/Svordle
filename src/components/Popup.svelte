@@ -1,14 +1,13 @@
 <script>
-    import { fade } from "svelte/transition";
+    import { scale } from "svelte/transition";
     export let popup = true;
     export let popupText = "";
 </script>
 
-<aside
-    transition:fade={{ duration: 120 }}
-    on:click={() => (popup = false)}
->
-    {@html popupText}
+<aside transition:scale={{ duration: 200 }}>
+    <p on:click={() => (popup = false)}>
+        {@html popupText}
+    </p>
 </aside>
 
 <style>
@@ -18,12 +17,17 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column;
-        background: #000e;
         z-index: 100;
-        cursor: pointer;
-        font-size: 30px;
-        text-align: center;
+    }
+    p {
+        font-size: 22px;
         line-height: 1.5;
+        font-weight: bold;
+        padding: 10px 20px;
+        background: #eee;
+        color: #111;
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0px 0px 5px #fff4;
     }
 </style>
