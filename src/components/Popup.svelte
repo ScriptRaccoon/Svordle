@@ -4,22 +4,20 @@
     export let popupText = "";
 </script>
 
-<aside transition:scale={{ duration: 200 }}>
-    <p on:click={() => (popup = false)}>
-        {@html popupText}
-    </p>
+<aside
+    transition:scale={{ duration: 200 }}
+    on:click={() => (popup = false)}
+>
+    {@html popupText}
 </aside>
 
 <style>
     aside {
-        position: fixed;
-        inset: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
         z-index: 100;
-    }
-    p {
         font-size: 22px;
         line-height: 1.5;
         font-weight: bold;
@@ -28,6 +26,6 @@
         color: #111;
         border-radius: 10px;
         cursor: pointer;
-        box-shadow: 0px 0px 5px #fff4;
+        box-shadow: 0px 0px 10px #0007;
     }
 </style>
