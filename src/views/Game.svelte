@@ -73,8 +73,10 @@
     function pressKey(key) {
         if (!playing || !$keys.includes(key)) return;
         if (key != "Backspace") {
-            grid[row][column] = key;
-            if (column < $WORD_LENGTH) column++;
+            if (column < $WORD_LENGTH) {
+                grid[row][column] = key;
+                column++;
+            }
         } else {
             if (column > 0) {
                 column--;
