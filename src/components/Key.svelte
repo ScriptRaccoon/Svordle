@@ -48,8 +48,7 @@
         font-size: min(30px, 6vw);
         background: var(--color-key);
         box-shadow: 0px var(--shadow-size) 0px var(--color-key-dark);
-        transition: background var(--speed) linear,
-            box-shadow var(--speed) linear;
+        transition: background var(--speed) linear;
     }
 
     button.backspace {
@@ -66,20 +65,14 @@
 
     button.correct {
         background: var(--color-correct);
-        box-shadow: 0px var(--shadow-size) 0px
-            var(--color-correct-dark);
     }
 
     button.present {
         background: var(--color-present);
-        box-shadow: 0px var(--shadow-size) 0px
-            var(--color-present-dark);
     }
 
     button.absent {
         background: var(--color-absent);
-        box-shadow: 0px var(--shadow-size) 0px
-            var(--color-absent-dark);
     }
 
     button.pressed {
