@@ -51,10 +51,6 @@ export const texts = {
         en: "Correct! 🎉",
         de: "Richtig! 🎉",
     },
-    correct: {
-        en: "The correct word was:",
-        de: "Das richtige Wort war:",
-    },
     clipboard: {
         en: "Copied result to clipboard",
         de: "Ergebnis in die Zwischenablage kopiert",

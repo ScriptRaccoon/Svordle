@@ -16,8 +16,9 @@
         letters,
     } from "../stores.js";
 
-    let code = "",
-        playing,
+    // initialize values
+
+    let playing,
         grid,
         evaluation,
         evaluationDone,
@@ -27,7 +28,8 @@
         popup,
         popupText,
         won,
-        confirm;
+        confirm,
+        code;
 
     async function initializeValues() {
         playing = true;
@@ -52,15 +54,33 @@
 
     $: if ($language) initializeValues();
 
+    // key input
+
+    function handleKeyInput(e) {
+        if (!playing) return;
+        const key = e.detail;
+        if (key != "Backspace") {
+            grid[row][column] = key;
+            if (column < $WORD_LENGTH) column++;
+        } else {
+            if (column > 0) {
+                column--;
+                grid[row][column] = "";
+            }
+        }
+    }
+
+    // handle submit
+
     async function handleSubmit() {
         if (column != $WORD_LENGTH || !playing) return;
         const word = grid[row].join("");
-        const ev = await getEvaluation($language, word, code);
-        if (!ev.valid) {
+        const evalu = await getEvaluation($language, word, code);
+        if (!evalu.valid) {
             showPopup(texts.notValid[$language]);
         } else {
             evaluationDone[row] = true;
-            evaluation[row] = ev.letters;
+            evaluation[row] = evalu.letters;
             updateLetterEvaluation();
             await sleep(
                 $FLIP_SPEED + ($WORD_LENGTH - 1) * $FLIP_DELAY
@@ -81,6 +101,33 @@
             }
         }
     }
+
+    function updateLetterEvaluation() {
+        for (let index = 0; index < $WORD_LENGTH; index++) {
+            const letter = grid[row][index];
+            if (letterEvaluation[letter] == "correct") continue;
+            letterEvaluation[letter] = evaluation[row][index];
+        }
+    }
+
+    function endGame() {
+        playing = false;
+    }
+
+    // restart
+
+    function handleRestart() {
+        if (!playing || confirm) {
+            initializeValues();
+        } else {
+            confirm = true;
+            setTimeout(() => {
+                confirm = false;
+            }, 5000);
+        }
+    }
+
+    // share function
 
     async function shareResult() {
         const languageSymbol = $language == "de" ? "🇩🇪" : "🇬🇧";
@@ -108,20 +155,7 @@
         showPopup(texts.clipboard[$language]);
     }
 
-    function handleRestart() {
-        if (!playing || confirm) {
-            initializeValues();
-        } else {
-            confirm = true;
-            setTimeout(() => {
-                confirm = false;
-            }, 5000);
-        }
-    }
-
-    function endGame() {
-        playing = false;
-    }
+    // popup function
 
     function showPopup(text, duration = 3000) {
         popupText = text;
@@ -130,41 +164,17 @@
             popup = false;
         }, duration);
     }
-
-    function handleKeyInput(e) {
-        if (!playing) return;
-        const key = e.detail;
-        if (key != "Backspace") {
-            grid[row][column] = key;
-            if (column < $WORD_LENGTH) column++;
-        } else {
-            if (column > 0) {
-                column--;
-                grid[row][column] = "";
-            }
-        }
-    }
-
-    function updateLetterEvaluation() {
-        for (let index = 0; index < $WORD_LENGTH; index++) {
-            const letter = grid[row][index];
-            if (letterEvaluation[letter] == "correct") continue;
-            letterEvaluation[letter] = evaluation[row][index];
-        }
-    }
 </script>
 
 <Header />
 
-{#if grid.length == $ATTEMPTS}
-    <Grid
-        {playing}
-        {grid}
-        {evaluation}
-        {evaluationDone}
-        currentRow={row}
-    />
-{/if}
+<Grid
+    {playing}
+    {grid}
+    {evaluation}
+    {evaluationDone}
+    currentRow={row}
+/>
 
 <menu>
     {#if column == $WORD_LENGTH && playing}
