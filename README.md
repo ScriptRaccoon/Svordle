@@ -13,7 +13,7 @@ This is a version of the [Wordle game](https://www.powerlanguage.co.uk/wordle/) 
 
 You can also share your result after each game.
 
-Wordle 🇬🇧 4/6
+Svordle 🇬🇧 4/6
 
 ⬛🟨⬛⬛⬛<br>
 ⬛🟩⬛🟩🟩<br>

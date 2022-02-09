@@ -23,7 +23,7 @@
     </p>
     <aside>
         <a
-            href="https://github.com/ScriptRaccoon/Wordle"
+            href="https://github.com/ScriptRaccoon/Svordle"
             target="_blank"
             >Made by Script Raccoon
         </a>
