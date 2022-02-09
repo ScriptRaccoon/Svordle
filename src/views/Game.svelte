@@ -167,7 +167,7 @@
             }
             result += "\n";
         }
-        result += "\n" + `https://svordle.netlify.app`;
+        result += "\n" + `https://svordle.xyz`;
         await navigator.clipboard.writeText(result);
         showPopup(texts.clipboard[$language]);
     }
