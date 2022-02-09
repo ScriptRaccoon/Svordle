@@ -14,6 +14,7 @@
         FLIP_DELAY,
         FLIP_SPEED,
         letters,
+        keys,
     } from "../stores.js";
 
     // initialize values
@@ -54,11 +55,23 @@
 
     $: if ($language) initializeValues();
 
-    // key input
+    // keyboard input
+
+    document.addEventListener("keydown", (e) => {
+        const key = e.key;
+        if (key == "Enter") {
+            handleSubmit();
+        } else {
+            pressKey(key);
+        }
+    });
 
     function handleKeyInput(e) {
-        if (!playing) return;
-        const key = e.detail;
+        pressKey(e.detail);
+    }
+
+    function pressKey(key) {
+        if (!playing || !$keys.includes(key)) return;
         if (key != "Backspace") {
             grid[row][column] = key;
             if (column < $WORD_LENGTH) column++;
@@ -117,6 +130,7 @@
     // restart
 
     function handleRestart() {
+        this.blur();
         if (!playing || confirm) {
             initializeValues();
         } else {
@@ -130,6 +144,7 @@
     // share function
 
     async function shareResult() {
+        if (playing) return;
         const languageSymbol = $language == "de" ? "🇩🇪" : "🇬🇧";
         let result = `Wordle ${languageSymbol} `;
         result += won ? (row + 1).toString() : "X";

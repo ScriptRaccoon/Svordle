@@ -23,6 +23,7 @@
     button {
         opacity: 0.5;
     }
+    button:focus,
     button:hover {
         opacity: 1;
     }

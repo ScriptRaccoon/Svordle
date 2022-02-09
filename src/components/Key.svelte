@@ -59,6 +59,7 @@
             var(--color-backspace-dark);
     }
 
+    button:focus,
     button:hover {
         filter: brightness(1.2);
     }

@@ -47,16 +47,17 @@
     menu {
         font-size: 40px;
     }
-    menu button {
+    button {
         padding: 5px 10px;
         opacity: 0.4;
     }
-    menu button:hover,
-    menu button.active {
+    button:focus,
+    button:hover,
+    button.active {
         opacity: 1;
     }
 
-    menu button img {
+    button img {
         width: 50px;
         border-radius: 4px;
     }

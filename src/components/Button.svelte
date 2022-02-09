@@ -14,7 +14,8 @@
         border-radius: 4px;
     }
 
+    button:focus,
     button:hover {
-        filter: brightness(1.3);
+        filter: brightness(1.2);
     }
 </style>
