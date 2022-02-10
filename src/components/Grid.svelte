@@ -58,7 +58,7 @@
         justify-content: center;
         align-items: center;
         border-radius: 4px;
-        transition: border 1500ms linear;
+        transition: border var(--speed) linear;
     }
 
     span.correct {
