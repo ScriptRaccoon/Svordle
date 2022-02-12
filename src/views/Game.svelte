@@ -30,7 +30,8 @@
         popupText,
         won,
         confirm,
-        code;
+        code,
+        submitting;
 
     async function initializeValues() {
         playing = true;
@@ -50,6 +51,7 @@
         popupText = "";
         won = null;
         confirm = false;
+        submitting = false;
         code = await getCode($language);
     }
 
@@ -88,7 +90,8 @@
     // handle submit
 
     async function handleSubmit() {
-        if (column != $WORD_LENGTH || !playing) return;
+        if (column != $WORD_LENGTH || !playing || submitting) return;
+        submitting = true;
         const word = grid[row].join("");
         const evalu = await getEvaluation($language, word, code);
         if (!evalu.valid) {
@@ -115,6 +118,7 @@
                 }
             }
         }
+        submitting = false;
     }
 
     function updateLetterEvaluation() {
