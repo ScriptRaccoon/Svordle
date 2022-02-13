@@ -16,7 +16,6 @@
         .map((_, i) => i);
     export let currentRow = 1;
     export let playing = true;
-    export let evaluationDone = [];
 </script>
 
 <div
@@ -32,7 +31,7 @@
                 class={evaluation[row][column]
                     ? evaluation[row][column]
                     : ""}
-                class:flip={evaluationDone[row]}
+                class:flip={evaluation[row][column] != null}
                 class:current={row == currentRow && playing}
                 >{@html customUpperCase(grid[row][column])}</span
             >

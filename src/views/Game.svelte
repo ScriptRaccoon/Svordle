@@ -22,7 +22,6 @@
     let playing,
         grid,
         evaluation,
-        evaluationDone,
         row,
         column,
         letterEvaluation,
@@ -41,7 +40,6 @@
         evaluation = new Array($ATTEMPTS)
             .fill(0)
             .map(() => new Array($WORD_LENGTH).fill(null));
-        evaluationDone = new Array($WORD_LENGTH).fill(false);
         row = 0;
         column = 0;
         letterEvaluation = Object.fromEntries(
@@ -97,7 +95,6 @@
         if (!evalu.valid) {
             showPopup(texts.notValid[$language]);
         } else {
-            evaluationDone[row] = true;
             evaluation[row] = evalu.letters;
             updateLetterEvaluation();
             await sleep(
@@ -189,13 +186,7 @@
 
 <Header />
 
-<Grid
-    {playing}
-    {grid}
-    {evaluation}
-    {evaluationDone}
-    currentRow={row}
-/>
+<Grid {playing} {grid} {evaluation} currentRow={row} />
 
 <menu>
     {#if column == $WORD_LENGTH && playing}
