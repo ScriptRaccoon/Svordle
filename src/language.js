@@ -3,6 +3,10 @@ export const texts = {
         de: "Das klassische Wortspiel",
         en: "The classical word game",
     },
+    credit: {
+        en: 'Svordle is based on <a target="_blank" href="https://www.nytimes.com/games/wordle/index.html">Wordle</a> and is made with <a target="_blank" href="https://svelte.dev">Svelte</a>',
+        de: 'Svordle basiert auf <a target="_blank" href="https://www.nytimes.com/games/wordle/index.html">Wordle</a> und wurde mit <a target="_blank" href="https://svelte.dev">Svelte</a> umgesetzt',
+    },
     helpTitle: {
         de: "Hilfe",
         en: "Help",

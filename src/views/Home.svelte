@@ -21,13 +21,18 @@
     <p>
         <Button text="Start" action={() => ($view = "game")} />
     </p>
-    <aside>
-        <a
-            href="https://github.com/ScriptRaccoon/Svordle"
-            target="_blank"
-            >Made by Script Raccoon
-        </a>
-    </aside>
+    <footer>
+        <div>
+            Made by <a
+                href="https://github.com/ScriptRaccoon/Svordle"
+                target="_blank"
+                >Script Raccoon
+            </a>
+        </div>
+        <div>
+            {@html texts.credit[$language]}
+        </div>
+    </footer>
 </div>
 
 <style>
@@ -61,13 +66,20 @@
         width: 50px;
         border-radius: 4px;
     }
-    aside {
+    footer {
         position: fixed;
         bottom: 20px;
         left: 0;
         right: 0;
         text-align: center;
-        opacity: 0.5;
+        color: var(--color-key);
         font-size: 14px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+    }
+    :global(footer a) {
+        color: var(--color-present);
     }
 </style>
